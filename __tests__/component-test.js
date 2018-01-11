@@ -3,7 +3,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import TestComponent from '../components/TestComponent';
+import TestComponent from '../components/MovieAPI';
 
 test('работа TestComponent', () => {
 

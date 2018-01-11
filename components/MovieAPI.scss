@@ -1,0 +1,56 @@
+﻿@import '../core/style/variables';
+
+.PageMain__wrapper {
+    position: relative;
+    width: 100%;
+    .PageMain__container {
+        .PageMain__element {
+            position: relative;
+            padding: 20px;
+            width: 100%;
+            height: 400px;
+            background: center no-repeat;
+            background-size: 100%;
+            //background-position: center;
+            //background-repeat: no-repeat;
+            overflow: hidden;
+            background-color: #000000;
+            transition: background 1s ease;
+            margin: 20px;
+            & > .PageMain__overlay {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
+                padding: 10px;
+                position: relative;
+                height: 100%;
+                pointer-events: none;
+                opacity: 0;
+                color: lightgrey;
+
+                transition: opacity .3s ease;
+                & > .PageMain__overlay_title {
+                    font-size: 22px;
+                    font-weight: 200;
+                }
+                & > .PageMain__overlay_rating {
+                    font-size: 14px;
+                    font-weight: 200;
+                }
+                & > .PageMain__overlay_plot {
+                    font-size: 12px;
+                    margin-top: 100px;
+                    font-weight: 300;
+                    line-height: 1.6;
+                }
+            }
+            &:hover {
+                background-size: 130%;
+                & > .PageMain__overlay {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+
+}
