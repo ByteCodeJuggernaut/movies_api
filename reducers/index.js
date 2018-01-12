@@ -7,12 +7,12 @@ export const SEARCH_MOVIE_FAILURE = 'SEARCH_MOVIE_FAILURE';
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
-export const SET_MOVIE_LIST = 'SET_MOVIE_LIST';
+export const SET_POPULAR_MOVIE_LIST = 'SET_POPULAR_MOVIE_LIST';
 
 
 const defaultStateList = {
     isFetching: false,
-    items:[],
+    popularFilmsList:[],
     error:{}
 };
 
@@ -40,8 +40,8 @@ const movieList = (state = defaultStateList, action) => {
             return {...state, isFetching:false, items:action.data};
         case FETCH_MOVIES_FAILURE:
             return {...state, isFetching:false, error:action.data};
-        case SET_MOVIE_LIST:
-            return {...state, isFetching:true, error:null, items: action.dataMovies};
+        case SET_POPULAR_MOVIE_LIST:
+            return {...state, isFetching:true, error:null, popularFilmsList: action.dataMovies};
         default:
             return state;
     }

@@ -15,7 +15,6 @@ function fetchMoviesFail(error) {
     };
 }
 
-
 export function fetchMovieList(option){
     let url;
     if(option) {

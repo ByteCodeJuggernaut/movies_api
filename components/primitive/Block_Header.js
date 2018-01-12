@@ -64,13 +64,6 @@ class BlockHeader extends React.PureComponent {
 
 export default connect (
     state => ({
-        testStore: state
-    }),
-    dispatch => ({
-        newOnClick: (value) => {
-            dispatch({
-                type:'NEW_CLICK', payload: value,
-            })
-        }
+        storeApi: state
     }),)
     (BlockHeader);

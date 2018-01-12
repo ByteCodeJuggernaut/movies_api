@@ -41,8 +41,8 @@ class MovieAPI extends React.PureComponent {
                 }, () => {
                     console.log( "data", this.state.getData );
                     this.props.dispatch({
-                        type: "SET_MOVIE_LIST",
-                        dataMovies: this.state.getData,
+                        type: "SET_POPULAR_MOVIE_LIST",
+                        dataMovies: this.state.getData.results,
                     })
                 } );
             }, () => {
@@ -57,7 +57,7 @@ class MovieAPI extends React.PureComponent {
     isNotEmpty = ( value ) => (value !== null && value !== undefined && value.length > 0);
 
     __renderListFilms = () => {
-        let listFilms = [ ...this.state.getData.results ];
+        let listFilms = [ ...this.props.storeApi.movieList.popularFilmsList ];
         console.log("list films", listFilms);
         if ( this.isNotEmpty( listFilms ) ) {
             let renderFilm = listFilms.map( ( film ) => {
@@ -90,13 +90,13 @@ class MovieAPI extends React.PureComponent {
 
 
     render() {
-        console.log("testStore", this.props.testStore);
+        console.log("storeApi", this.props.storeApi);
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( !this.state.getData ) return <p>Loading</p>
         return (
             <div className = { this.compMainClass + "__wrapper"}>
                 <Grid className = { this.compMainClass + "__container"}>
-                    <BlockHeader menuList = { this.props.testStore.menuList.menuList }/>
+                    <BlockHeader menuList = { this.props.storeApi.menuList.menuList }/>
                     <Row>
                         { this.__renderListFilms() }
                     </Row>
@@ -109,6 +109,6 @@ class MovieAPI extends React.PureComponent {
 
 export default connect (
     state => ({
-        testStore: state
+        storeApi: state
     }),
 ) (MovieAPI);
