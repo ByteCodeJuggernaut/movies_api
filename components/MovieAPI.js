@@ -5,6 +5,8 @@ import {URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_X
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 
+import BlockHeader from './primitive/Block_Header';
+
 import './MovieAPI.scss';
 
 
@@ -37,7 +39,11 @@ class MovieAPI extends React.PureComponent {
                 this.setState( {
                     getData: data,
                 }, () => {
-                    console.log( "data", this.state.getData )
+                    console.log( "data", this.state.getData );
+                    this.props.dispatch({
+                        type: "SET_MOVIE_LIST",
+                        dataMovies: this.state.getData,
+                    })
                 } );
             }, () => {
                 this.setState( {
@@ -59,7 +65,7 @@ class MovieAPI extends React.PureComponent {
                     <Col xs={12} sm={2} md={3} lg={3}
                          key={ film.id }>
                         <div className = { this.compMainClass + "__element"}
-                             style = {{backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')'}}>
+                             style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
                             <div className = { this.compMainClass + "__overlay" }>
                                 <div className = { this.compMainClass + "__overlay_title" }>
                                     { film.title }
@@ -82,12 +88,15 @@ class MovieAPI extends React.PureComponent {
         }
     };
 
+
     render() {
+        console.log("testStore", this.props.testStore);
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( !this.state.getData ) return <p>Loading</p>
         return (
             <div className = { this.compMainClass + "__wrapper"}>
                 <Grid className = { this.compMainClass + "__container"}>
+                    <BlockHeader menuList = { this.props.testStore.menuList.menuList }/>
                     <Row>
                         { this.__renderListFilms() }
                     </Row>
@@ -98,4 +107,8 @@ class MovieAPI extends React.PureComponent {
 
 }
 
-export default MovieAPI;
+export default connect (
+    state => ({
+        testStore: state
+    }),
+) (MovieAPI);
