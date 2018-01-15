@@ -1,16 +1,16 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 import { default as isoFetch } from 'isomorphic-fetch';
-import {URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../actions/const';
+import {URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 
-import BlockHeader from './primitive/Block_Header';
+import BlockHeader from '../../components/complex/Block_Header';
 
-import './MovieAPI.scss';
+import './Page_Main.scss';
 
 
-class MovieAPI extends React.PureComponent {
+class PageMain extends React.PureComponent {
 
     static propTypes = {
         //name: PropTypes.string.isRequired,
@@ -96,7 +96,7 @@ class MovieAPI extends React.PureComponent {
         return (
             <div className = { this.compMainClass + "__wrapper"}>
                 <Grid className = { this.compMainClass + "__container"}>
-                    <BlockHeader menuList = { this.props.storeApi.menuList.menuList }/>
+
                     <Row>
                         { this.__renderListFilms() }
                     </Row>
@@ -111,4 +111,4 @@ export default connect (
     state => ({
         storeApi: state
     }),
-) (MovieAPI);
+) (PageMain);

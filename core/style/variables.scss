@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900');
+
 //fonts
 $font: 'Roboto', sans-serif;
 $h0: 48px;
@@ -19,3 +21,9 @@ $dark-70: rgba(27, 39, 51, 0.7);
 $dark-50: rgba(27, 39, 51, 0.5);
 $dark-30: rgba(27, 39, 51, 0.3);
 $dark-15: rgba(27, 39, 51, 0.15);
+
+$default-50: rgba(255, 255, 255, 0.5);
+$default-70: rgba(255, 255, 255, 0.7);
+$default-80: rgba(255, 255, 255, 0.8);
+$default-90: rgba(255, 255, 255, 0.9);
+$default: rgba(255, 255, 255, 1);

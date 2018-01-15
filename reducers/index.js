@@ -19,9 +19,9 @@ const defaultStateList = {
 const defaultMenuList = {
     menuList: [
         'Главная',
-        'Фильмы',
-        'Сериалы',
-        'Информация'
+        'Лучший выбор',
+        'Мой список',
+        'Недавние'
     ]
 };
 
