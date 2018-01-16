@@ -4,6 +4,7 @@ import { default as isoFetch } from 'isomorphic-fetch';
 import {URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import BlockHeader from '../../components/complex/Block_Header';
 import BlockHeaderSlide from '../../components/complex/Block_HeaderSlide';
@@ -65,22 +66,24 @@ class PageMain extends React.PureComponent {
                 return (
                     <Col xs={12} sm={2} md={3} lg={3}
                          key={ film.id }>
-                        <div className = { this.compMainClass + "__element"}
-                             style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
-                            <div className = { this.compMainClass + "__overlay" }>
-                                <div className = { this.compMainClass + "__overlay_title" }>
-                                    { film.title }
-                                </div>
-                                <div className = { this.compMainClass + "__overlay_rating" }>
-                                    { film.vote_average }
-                                </div>
-                                <div className = { this.compMainClass + "__overlay_plot" }>
-                                    {
-                                        (film.overview.length > 100) ?  film.overview.substring(0, 100) + "..." : film.overview
-                                    }
+                        <Link to={'/movie/'+ film.id} >
+                            <div className = { this.compMainClass + "__element"}
+                                 style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
+                                <div className = { this.compMainClass + "__overlay" }>
+                                    <div className = { this.compMainClass + "__overlay_title" }>
+                                        { film.title }
+                                    </div>
+                                    <div className = { this.compMainClass + "__overlay_rating" }>
+                                        { film.vote_average }
+                                    </div>
+                                    <div className = { this.compMainClass + "__overlay_plot" }>
+                                        {
+                                            (film.overview.length > 100) ?  film.overview.substring(0, 100) + "..." : film.overview
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
 
                     </Col>
                 )

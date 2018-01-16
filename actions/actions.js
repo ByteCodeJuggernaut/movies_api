@@ -15,6 +15,24 @@ function fetchMoviesFail(error) {
     };
 }
 
+function fetchMovie() {
+    return {
+        type: FETCH_MOVIE
+    };
+}
+
+
+export function fetchMovieDetail(id){
+    const url_movie = URL_DETAIL + id + API_KEY;
+    return function(dispatch){
+        dispatch(fetchMovie())
+        return fetch(url_movie)
+            .then(response => response.json())
+            .then(data => dispatch(fetchMovieSuccess(data)))
+            .catch(error => dispatch(fetchMovieFail(error)))
+    }
+}
+
 export function fetchMovieList(option){
     let url;
     if(option) {

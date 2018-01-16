@@ -2,6 +2,7 @@ export const API_KEY = '?api_key=4d4ed145d3584846f5922b6a467e1f85';
 export const API_KEY_ALT = '&api_key=65bb0de10429ea02eeee57ec78b575a3';
 export const URL_LIST = 'https://api.themoviedb.org/3/discover/movie';
 export const URL_NOW_PLAYING = 'https://api.themoviedb.org/3/movie/now_playing';
+export const URL_DETAIL = 'https://api.themoviedb.org/3/movie/';
 export const LANGUAGE = '&language=ru&';
 export const REGION = '&region=ru&';
 export const ADULTS = '&include_adult=true';

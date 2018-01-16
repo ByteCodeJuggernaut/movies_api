@@ -30,6 +30,7 @@ ReactDOM.render(
             <div>
                 <BlockHeader/>
                 <Route exact path="/" component = { PageMain }/>
+                <Route path="/movie/:id" component = { PageMovieInfo }/>
             </div>
         </BrowserRouter>
     </Provider>

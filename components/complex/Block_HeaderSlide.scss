@@ -7,12 +7,14 @@
     min-height:100vh;
     width: 100%;
 
+
     & > .BlockHeaderSlide__slider {
         display: flex;
         position: relative;
         height:100vh;
         min-height:100vh;
         width: 100%;
+
         & > .BlockHeaderSlide__slide {
             display: flex;
             width: 100%;
@@ -28,8 +30,10 @@
                 flex-wrap: wrap;
                 flex: 2 2 70%;
                 align-items: stretch;
-                padding: 30px;
+                padding: 100px 30px 30px 30px;
                 margin-top: 80px;
+                height: auto;
+                overflow: hidden;
                 position: relative;
                 & > .BlockHeaderSlide__head-title {
                     position: absolute;
@@ -51,6 +55,7 @@
                     letter-spacing: 1px;
                     color: $default-90;
                     font-weight: bold;
+                    height: auto;
                     padding: 15px 10px;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }
@@ -58,6 +63,7 @@
                     font-size: 24px;
                     color: $default-80;
                     padding: 0 10px;
+                    height: auto;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                     margin-bottom: 10px;
                     & > span {
@@ -71,6 +77,7 @@
                     font-size: 24px;
                     color: $default-80;
                     padding: 0 10px;
+                    height: auto;
                     margin-bottom: 30px;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                     & > span {
@@ -79,9 +86,11 @@
                     }
                 }
                 & > .BlockHeaderSlide__description {
+                    display: block;
                     font-size: $default + 2;
                     line-height: 1.5;
                     padding: 10px;
+                    height: auto;
                     color: $default-90;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }

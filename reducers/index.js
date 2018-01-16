@@ -9,6 +9,7 @@ export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 export const SET_POPULAR_MOVIE_LIST = 'SET_POPULAR_MOVIE_LIST';
 export const SET_MOVIE_TODAY_LIST = 'SET_MOVIE_TODAY_LIST';
+export const SET_RECENT_MOVIES = 'SET_RECENT_MOVIES';
 
 
 const defaultMovieList = {
@@ -20,6 +21,12 @@ const defaultMovieList = {
 const defaultPrimaryMovieList = {
     isFetching: false,
     dataPrimary:[],
+    error:{}
+};
+
+const defaultRecentMovie = {
+    isFetching: false,
+    recentMovies:{},
     error:{}
 };
 
@@ -64,10 +71,20 @@ const primaryMovieList = ( state = defaultPrimaryMovieList, action ) => {
     }
 };
 
+const recentMoviesList = ( state = defaultRecentMovie, action ) => {
+    switch ( action.type ){
+        case SET_RECENT_MOVIES:
+            return {...state, isFetching:true, error:null, recentMovies: action.movieDetail};
+        default:
+            return state;
+    }
+};
+
 const moviesApi = combineReducers({
     movieList,
     menuList,
     primaryMovieList,
+    recentMoviesList,
     routing: routerReducer
 
 });
