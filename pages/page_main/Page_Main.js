@@ -6,6 +6,7 @@ import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid
 import { connect } from 'react-redux';
 
 import BlockHeader from '../../components/complex/Block_Header';
+import BlockHeaderSlide from '../../components/complex/Block_HeaderSlide';
 
 import './Page_Main.scss';
 
@@ -39,7 +40,7 @@ class PageMain extends React.PureComponent {
                 this.setState( {
                     getData: data,
                 }, () => {
-                    console.log( "data", this.state.getData );
+                    // console.log( "data", this.state.getData );
                     this.props.dispatch({
                         type: "SET_POPULAR_MOVIE_LIST",
                         dataMovies: this.state.getData.results,
@@ -58,7 +59,7 @@ class PageMain extends React.PureComponent {
 
     __renderListFilms = () => {
         let listFilms = [ ...this.props.storeApi.movieList.popularFilmsList ];
-        console.log("list films", listFilms);
+        // console.log("list films", listFilms);
         if ( this.isNotEmpty( listFilms ) ) {
             let renderFilm = listFilms.map( ( film ) => {
                 return (
@@ -90,13 +91,16 @@ class PageMain extends React.PureComponent {
 
 
     render() {
-        console.log("storeApi", this.props.storeApi);
+        console.log("storeApi", this.props);
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( !this.state.getData ) return <p>Loading</p>
         return (
             <div className = { this.compMainClass + "__wrapper"}>
+                <BlockHeaderSlide/>
                 <Grid className = { this.compMainClass + "__container"}>
+                    <Row>
 
+                    </Row>
                     <Row>
                         { this.__renderListFilms() }
                     </Row>

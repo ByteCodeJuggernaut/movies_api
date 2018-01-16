@@ -8,11 +8,18 @@ export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 export const SET_POPULAR_MOVIE_LIST = 'SET_POPULAR_MOVIE_LIST';
+export const SET_MOVIE_TODAY_LIST = 'SET_MOVIE_TODAY_LIST';
 
 
-const defaultStateList = {
+const defaultMovieList = {
     isFetching: false,
     popularFilmsList:[],
+    error:{}
+};
+
+const defaultPrimaryMovieList = {
+    isFetching: false,
+    dataPrimary:[],
     error:{}
 };
 
@@ -32,7 +39,7 @@ const menuList = ( state = defaultMenuList, action ) => {
     }
 };
 
-const movieList = (state = defaultStateList, action) => {
+const movieList = (state = defaultMovieList, action) => {
     switch (action.type){
         case FETCH_MOVIES:
             return {...state, isFetching:true};
@@ -42,6 +49,16 @@ const movieList = (state = defaultStateList, action) => {
             return {...state, isFetching:false, error:action.data};
         case SET_POPULAR_MOVIE_LIST:
             return {...state, isFetching:true, error:null, popularFilmsList: action.dataMovies};
+
+        default:
+            return state;
+    }
+};
+
+const primaryMovieList = ( state = defaultPrimaryMovieList, action ) => {
+    switch ( action.type ){
+        case SET_MOVIE_TODAY_LIST:
+            return {...state, isFetching:true, error:null, dataPrimary: action.dataPrimary};
         default:
             return state;
     }
@@ -50,6 +67,7 @@ const movieList = (state = defaultStateList, action) => {
 const moviesApi = combineReducers({
     movieList,
     menuList,
+    primaryMovieList,
     routing: routerReducer
 
 });
