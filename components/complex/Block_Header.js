@@ -17,7 +17,7 @@ class BlockHeader extends React.PureComponent {
 
     static defaultProps = {
         accountName: "Andrew Lebowskiy",
-        accountIconURL: "./images/accounts/default.jpg"
+        accountIconURL: "/images/accounts/default.jpg"
 
     };
 
@@ -53,12 +53,12 @@ class BlockHeader extends React.PureComponent {
     };
 
     handleHoverImg = (e) => {
-        e.currentTarget.setAttribute('src', './images/logo-api-white.png');
+        e.currentTarget.setAttribute('src', '/images/logo-api-white.png');
     };
 
 
     handleUnHoverImg = (e) => {
-        e.currentTarget.setAttribute('src', './images/logo-api.png');
+        e.currentTarget.setAttribute('src', '/images/logo-api.png');
     };
 
     __renderMenuList = () => {
@@ -80,7 +80,7 @@ class BlockHeader extends React.PureComponent {
             <Row className = { this.compMainClass + "__container" + " " + this.state.activeClass }>
                 <Col className = { this.compMainClass + "__logo-box" }>
                     <a href="#" title="Вернуться на главную">
-                        <img src="./images/logo-api.png"
+                        <img src="/images/logo-api.png"
                              alt="Логотип MOVIEFLIX"
                              onMouseOver={ this.handleHoverImg }
                              onMouseOut={ this.handleUnHoverImg }

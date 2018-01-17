@@ -2,11 +2,12 @@ import React                                            from 'react';
 import ReactDOM                                         from 'react-dom';
 import { Provider }                                     from 'react-redux';
 import { createStore, applyMiddleware }                                  from 'redux';
-// import { Router, Route, hasHistory , IndexRoute }   from 'react-router';
-import { BrowserRouter, Route } from 'react-router-dom';
-// import { syncHistoryWithStore, routerMiddleware }       from 'react-router-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk                                  from 'redux-thunk';
+// import { Router, Route, hasHistory , IndexRoute }    from 'react-router';
+import { BrowserRouter as Router, Route }               from 'react-router-dom';
+import { CSSTransitionGroup }                           from 'react-transition-group'
+import { syncHistoryWithStore, routerMiddleware }       from 'react-router-redux';
+import { composeWithDevTools }                          from 'redux-devtools-extension';
+import thunk                                            from 'redux-thunk';
 
 import movieApp                                         from './reducers';
 import App                                              from './App';
@@ -18,20 +19,23 @@ import BlockHeader                                      from './components/compl
 // если необходимо, вид сборки можно проверить в коде:
 // if (process.env.NODE_ENV === 'production') {
 // if (process.env.NODE_ENV !== 'production') {
-// require('./App.scss');
+require('./App.scss');
 
-// const routeMiddleware = routerMiddleware(hashHistory);
+
 const store = createStore( movieApp, composeWithDevTools(applyMiddleware(thunk)));
-// const history = syncHistoryWithStore(hashHistory,store);
+
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <Router>
             <div>
                 <BlockHeader/>
-                <Route exact path="/" component = { PageMain }/>
-                <Route path="/movie/:id" component = { PageMovieInfo }/>
+
+                    <Route exact path="/" component = { PageMain }/>
+                    <Route path="/movie/:id" component = { PageMovieInfo }/>
+
             </div>
-        </BrowserRouter>
+        </Router>
     </Provider>
     , document.getElementById('container') );

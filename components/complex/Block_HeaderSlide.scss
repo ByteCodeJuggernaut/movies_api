@@ -6,15 +6,12 @@
     height:100vh;
     min-height:100vh;
     width: 100%;
-
-
     & > .BlockHeaderSlide__slider {
         display: flex;
         position: relative;
         height:100vh;
         min-height:100vh;
         width: 100%;
-
         & > .BlockHeaderSlide__slide {
             display: flex;
             width: 100%;
@@ -23,6 +20,7 @@
             flex-wrap: wrap;
             padding: 120px 80px 80px 80px;
             position: relative;
+            overflow: hidden;
             background-size: cover!important;
             & > .BlockHeaderSlide__left-side {
                 display: flex;
@@ -30,15 +28,13 @@
                 flex-wrap: wrap;
                 flex: 2 2 70%;
                 align-items: stretch;
-                padding: 100px 30px 30px 30px;
-                margin-top: 80px;
-                height: auto;
-                overflow: hidden;
+                padding: 50px 30px 30px 30px;
+                margin-top: 50px;
                 position: relative;
                 & > .BlockHeaderSlide__head-title {
                     position: absolute;
                     left: -30px;
-                    top: -50px;
+                    top: -30px;
                     font-size: 28px;
                     margin-bottom: 30px;
                     text-transform: uppercase;
@@ -49,21 +45,25 @@
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }
                 & > .BlockHeaderSlide__title {
+                    display: block;
+                    position: relative;
+                    width: 100%;
                     font-size: 60px;
                     text-transform: uppercase;
                     line-height: 1.4;
                     letter-spacing: 1px;
                     color: $default-90;
                     font-weight: bold;
-                    height: auto;
                     padding: 15px 10px;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }
                 & > .BlockHeaderSlide__popularity {
+                    display: block;
+                    position: relative;
+                    width: 100%;
                     font-size: 24px;
                     color: $default-80;
                     padding: 0 10px;
-                    height: auto;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                     margin-bottom: 10px;
                     & > span {
@@ -74,10 +74,12 @@
                     }
                 }
                 & > .BlockHeaderSlide__data-release {
+                    display: block;
+                    position: relative;
+                    width: 100%;
                     font-size: 24px;
                     color: $default-80;
                     padding: 0 10px;
-                    height: auto;
                     margin-bottom: 30px;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                     & > span {
@@ -87,10 +89,11 @@
                 }
                 & > .BlockHeaderSlide__description {
                     display: block;
+                    position: relative;
+                    width: 100%;
                     font-size: $default + 2;
                     line-height: 1.5;
                     padding: 10px;
-                    height: auto;
                     color: $default-90;
                     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }

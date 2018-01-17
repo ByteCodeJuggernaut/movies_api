@@ -58,12 +58,12 @@ class BlockHeaderSlide extends React.PureComponent {
     compMainClass = "BlockHeaderSlide";
 
     __renderSlide = (array) => {
-        let elem = {...array[16]};
+        let elem = {...array[17]};
         let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + elem.backdrop_path;
         let styleSlide = {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.4) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
-
+        // console.log('elem.overview.length', elem.overview);
         return(
             <div className = { this.compMainClass + "__slide" } style={ styleSlide } >
                 <div className = { this.compMainClass + "__left-side" }>
@@ -87,7 +87,7 @@ class BlockHeaderSlide extends React.PureComponent {
                         </span>
                     </div>
                     <div className = { this.compMainClass + "__description" }>
-                        { elem.overview }
+                        {  elem.overview }
                     </div>
                 </div>
                 <div className = { this.compMainClass + "__right-side" }>

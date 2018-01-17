@@ -1,7 +1,139 @@
 @import '../../core/style/variables';
 
-.PageMain__wrapper {
+.PageMovieInfo__wrapper {
     display: block;
     position: relative;
-    padding-top: 130px;
+    background-size: 100%!important;
+    padding-top: 150px;
+    & > .PageMovieInfo__container {
+        & > .PageMovieInfo__row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 40px 0;
+            justify-content: center;
+            align-items: stretch;
+            & > .PageMovieInfo__left-column {
+                display: flex;
+                flex: 1 1 20%;
+                flex-direction: column;
+                flex-wrap: wrap;
+                position: relative;
+                justify-content: center;
+                align-items: stretch;
+                & > .PageMovieInfo__left-column_poster {
+                    display: block;
+                    max-width: 300px;
+                    border-radius: 10px;
+                    box-shadow: 0 14px 28px rgba(0,0,0,0.85), 0 10px 10px rgba(0,0,0,0.55);
+                }
+            }
+            & > .PageMovieInfo__right-column {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                flex: 1 1 70%;
+                padding: 20px 50px;
+                & > .PageMovieInfo__title {
+                    font-size: $h0;
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                    line-height: 1.4;
+                    text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                }
+                & > .PageMovieInfo__quote {
+                    font-size: $h2;
+                    font-style: italic;
+                    font-weight: 300;
+                    color: $default-90;
+                    margin-bottom: 20px;
+                    text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                }
+                & > .PageMovieInfo__inline-block {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: stretch;
+                    justify-content: flex-start;
+                    margin-bottom: 30px;
+                    & > .PageMovieInfo__data-release {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px;
+                        margin-right: 30px;
+                        color: #465e8d;
+                        text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                    }
+                    & > .PageMovieInfo__votes {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px;
+                        margin-right: 30px;
+                        color: #f3b50e;
+                        text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                    }
+                    & > .PageMovieInfo__votes-count {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px;
+                        margin-right: 30px;
+                        color: #e54549;
+                        text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                    }
+                    & .PageMovieInfo__inline-block_icon {
+                        width: 50px;
+                        height: 50px;
+                        margin-right: 15px;
+                        border-radius: 50%;
+                        box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                        overflow: hidden;
+                        border: 2px solid lightgrey;
+                        & > img {
+                            display: block;
+                            width: 100%;
+                        }
+                    }
+                    & .PageMovieInfo__inline-block_text {
+                        font-size: $h1;
+                        font-weight: bold;
+                    }
+                }
+                & > .PageMovieInfo__description {
+                    font-size: $default + 2;
+                    line-height: 1.4;
+                    padding: 10px;
+                    text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                    margin-bottom: 20px;
+                }
+                & > .PageMovieInfo__block-button {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: stretch;
+                    justify-content: flex-start;
+                    & > .PageMovieInfo__button {
+                        padding: 10px;
+                        margin-right: 10px;
+                        &:hover {
+                            color: #da2020;
+                        }
+                    }
+                    & > .active {
+                        background-color: green;
+                    }
+
+                }
+
+            }
+        }
+    }
 }
