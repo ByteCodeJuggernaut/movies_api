@@ -15,6 +15,10 @@ export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIE_FAILURE = 'FETCH_MOVIE_FAILURE';
 export const ADD_MOVIE_LATER = 'ADD_MOVIE_LATER';
 export const DELETE_MOVIE_LATER = 'DELETE_MOVIE_LATER';
+export const ADD_MOVIE_FAVORITES = 'ADD_MOVIE_FAVORITES';
+export const DELETE_MOVIE_FAVORITES = 'DELETE_MOVIE_FAVORITES';
+export const DELETE_MOVIE_WATCHED = 'DELETE_MOVIE_WATCHED';
+export const ADD_MOVIE_WATCHED = 'ADD_MOVIE_WATCHED';
 
 
 
@@ -30,8 +34,20 @@ const defaultPrimaryMovieList = {
     error:{}
 };
 
-const defaultLaterMovies = {
-    watchLater:[],
+const defaultMyMoviesList = {
+    watchLater:[
+        { movieValue: {id: 346364}, added: true },
+        { movieValue: {id: 353486}, added: true },
+
+    ],
+    watchFavorites: [
+        { movieValue: {id: 346364}, added: true },
+        { movieValue: {id: 353486}, added: true },
+    ],
+    watched: [
+        { movieValue: {id: 346364}, added: true },
+        { movieValue: {id: 353486}, added: true },
+    ]
 };
 
 const defaultRecentMovie = {
@@ -42,10 +58,22 @@ const defaultRecentMovie = {
 
 const defaultMenuList = {
     menuList: [
-        'Главная',
-        'Лучший выбор',
-        'Мой список',
-        'Недавние'
+        {
+            title: 'Главная',
+            linkTo: '/',
+        },
+        {
+            title: 'Лучший выбор',
+            linkTo: '/bestchoosefilms',
+        },
+        {
+            title: 'Мой список',
+            linkTo: '/mylist',
+        },
+        {
+            title: 'Недавние',
+            linkTo: '/recently',
+        },
     ]
 };
 
@@ -111,12 +139,20 @@ const movieDetail = (state = defaultRecentMovie, action) => {
     }
 };
 
-const listLaterMovies = ( state = defaultLaterMovies, action ) => {
+const myListMovies = ( state = defaultMyMoviesList, action ) => {
     switch (action.type) {
         case ADD_MOVIE_LATER:
             return { ...state, watchLater: action.addMovieLater };
         case DELETE_MOVIE_LATER:
-            return {...state};
+            return { ...state, watchLater: action.addMovieLater };
+        case ADD_MOVIE_FAVORITES:
+            return { ...state, watchFavorites: action.addMovieFavorites };
+        case DELETE_MOVIE_FAVORITES:
+            return { ...state, watchFavorites: action.addMovieFavorites };
+        case ADD_MOVIE_WATCHED:
+            return { ...state, watched: action.addMovieWatched };
+        case DELETE_MOVIE_WATCHED:
+            return { ...state, watched: action.addMovieWatched };
         default:
             return state;
     }
@@ -128,7 +164,7 @@ const moviesApi = combineReducers({
     primaryMovieList,
     recentMoviesList,
     movieDetail,
-    listLaterMovies,
+    myListMovies,
     routing: routerReducer
 
 });

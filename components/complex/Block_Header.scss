@@ -49,22 +49,25 @@
             justify-content: center;
             vertical-align: middle;
             & > .BlockHeader__menu-box_menu-item {
-                font-weight: 400;
-                padding: 7px 10px;
-                font-size: 14px;
-                transition: all .3s ease;
-                border-radius: 3px;
-                text-align: center;
-                color: $default-80;
-                margin-right: 5px;
-                &:last-child {
+                & > a {
+                    font-weight: 400;
+                    padding: 7px 10px;
+                    font-size: 14px;
+                    transition: all .3s ease;
+                    border-radius: 3px;
+                    text-align: center;
+                    color: $default-80;
                     margin-right: 5px;
+                    &:last-child {
+                        margin-right: 5px;
+                    }
+                    &:hover {
+                        background: #e50914;
+                        cursor: pointer;
+                        color: $default;
+                    }
                 }
-                &:hover {
-                    background: #e50914;
-                    cursor: pointer;
-                    color: $default;
-                }
+
             }
         }
     }

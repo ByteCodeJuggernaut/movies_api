@@ -20,14 +20,18 @@ class PageMovieInfo extends React.PureComponent {
     };
 
     static  defaultProps = {
-        addToLater: false,
+        addToLater:     false,
+        addToFavorites: false,
+        addToWatched:   false,
     };
 
     constructor( props ) {
         super( props );
         this.state = {
             ...props,
-            listLater: this.props.listLaterMovie.watchLater,
+            listLater: this.props.listMovie.watchLater,
+            listFavorites: this.props.listMovie.watchFavorites,
+            listWatched: this.props.listMovie.watched,
             movieID: this.props.match.params.id,
             requestFailed: false,
         }
@@ -77,11 +81,13 @@ class PageMovieInfo extends React.PureComponent {
     setToListLate = (e) => {
         let addedMovie = e.currentTarget.dataset.added;
         let copyListLater = [...this.state.listLater];
+        console.log("list later", copyListLater);
         let currentMovie = {...this.props.movieDetail.recentMovies};
+
         let idMovie = currentMovie.id;
         if ( addedMovie === "true") {
             let newListLater = copyListLater.filter( ( movie ) => {
-               if ( movie.id !== idMovie) {
+               if ( movie.movieValue.id !== idMovie) {
                    return movie;
                }
             });
@@ -89,28 +95,30 @@ class PageMovieInfo extends React.PureComponent {
                 addToLater: false,
                 listLater: newListLater,
             }, () => {
-                console.log("false", this.state.listLater);
                 this.props.dispatch({
                     type: "DELETE_MOVIE_LATER",
                     addMovieLater: this.state.listLater,
                 })
             })
         } else {
+            console.log('false');
             let movie = {
-                id: idMovie,
+                movieValue: currentMovie,
                 added: true,
             };
-            let copyListLater = [...this.state.listLater];
-            copyListLater.filter( ( item ) => {
-                 if ( item.id === idMovie ) {
-                     return movie;
-                 } else {
-                     return copyListLater.push(movie);
-                 }
-            });
-            console.log("copysdasdsaListLater", copyListLater);
+
+            let newList = [...this.state.listLater];
+            for( let i = 0; i < newList.length; i++) {
+                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                    return null;
+                } else {
+                    newList.push(movie);
+                    break;
+                }
+            }
+
             this.setState({
-                listLater: copyListLater,
+                listLater: [...newList],
                 addToLater: true,
             }, () => {
                 this.props.dispatch({
@@ -122,18 +130,148 @@ class PageMovieInfo extends React.PureComponent {
 
     };
 
-    checkedMovieInList = () => {
+    setToListFavorites = (e) => {
+        let addedMovie = e.currentTarget.dataset.added;
+        let copyList = [...this.state.listFavorites];
+        let currentMovie = {...this.props.movieDetail.recentMovies};
+
+        let idMovie = currentMovie.id;
+        if ( addedMovie === "true") {
+            let newList = copyList.filter( ( movie ) => {
+                if ( movie.movieValue.id !== idMovie) {
+                    return movie;
+                }
+            });
+            this.setState({
+                addToFavorites: false,
+                listFavorites: [...newList],
+            }, () => {
+                this.props.dispatch({
+                    type: "DELETE_MOVIE_FAVORITES",
+                    addMovieFavorites: this.state.listFavorites,
+                })
+            })
+        } else {
+
+            let movie = {
+                movieValue: currentMovie,
+                added: true,
+            };
+            let newList = [...this.state.listFavorites];
+            for( let i = 0; i < newList.length; i++) {
+                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                    return null;
+                } else {
+                    newList.push(movie);
+                    break;
+                }
+            }
+            this.setState({
+                listFavorites: [...newList],
+                addToLater: true,
+            }, () => {
+                this.props.dispatch({
+                    type: "ADD_MOVIE_FAVORITES",
+                    addMovieFavorites: this.state.listFavorites,
+                })
+            });
+        }
+
+    };
+
+    setToListWatched = (e) => {
+        let addedMovie = e.currentTarget.dataset.added;
+        let copyList = [...this.state.listWatched];
+        let currentMovie = {...this.props.movieDetail.recentMovies};
+
+        let idMovie = currentMovie.id;
+        if ( addedMovie === "true") {
+            let newList = copyList.filter( ( movie ) => {
+                if ( movie.movieValue.id !== idMovie) {
+                    return movie;
+                }
+            });
+            this.setState({
+                addToWatched: false,
+                listWatched: [...newList],
+            }, () => {
+                this.props.dispatch({
+                    type: "DELETE_MOVIE_WATCHED",
+                    addMovieWatched: this.state.listWatched,
+                })
+            })
+        } else {
+            let newMovie = {
+                movieValue: currentMovie,
+                added: true,
+            };
+            let newList = [...this.state.listWatched];
+            for( let i = 0; i < newList.length; i++) {
+                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                    return null;
+                } else {
+                    newList.push(newMovie);
+                    break;
+                }
+            }
+            this.setState({
+                listWatched: [...newList],
+                addToWatched: true,
+            }, () => {
+                this.props.dispatch({
+                    type: "ADD_MOVIE_WATCHED",
+                    addMovieWatched: this.state.listWatched,
+                })
+            });
+        }
+
+    };
+
+    checkedMovieInListLater = () => {
         let watchLater = [...this.state.listLater];
         let addedMovie;
         for( let i = 0; i < watchLater.length; i++) {
-            if( watchLater[i].id ===  this.state.getMovieID.id) {
+            if( watchLater[i].movieValue.id ===  this.state.getMovieID.id) {
                 addedMovie = true;
+                break;
             } else {
+
                 addedMovie = false;
             }
         }
         return addedMovie;
     };
+
+    checkedMovieInListFavorites = () => {
+        let copyList = [...this.state.listFavorites];
+        let addedMovie;
+        for( let i = 0; i < copyList.length; i++) {
+            if( copyList[i].movieValue.id ===  this.state.getMovieID.id) {
+                addedMovie = true;
+                break;
+            } else {
+
+                addedMovie = false;
+            }
+        }
+        return addedMovie;
+    };
+
+    checkedMovieInListWatched = () => {
+        let copyList = [...this.state.listWatched];
+        let addedMovie;
+        for( let i = 0; i < copyList.length; i++) {
+            if( copyList[i].movieValue.id ===  this.state.getMovieID.id) {
+                addedMovie = true;
+                break;
+            } else {
+
+                addedMovie = false;
+            }
+        }
+        return addedMovie;
+    };
+
 
 
     render() {
@@ -142,7 +280,7 @@ class PageMovieInfo extends React.PureComponent {
         let styleSlide = {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.9) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
-        // console.log("STORE", this.props);
+        console.log("STORE", this.props);
 
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( !this.state.getMovieID ) return <p>Loading</p>
@@ -192,16 +330,15 @@ class PageMovieInfo extends React.PureComponent {
                                 { movieDetail.overview }
                             </div>
                             <div className = { this.compMainClass + "__block-button"}>
-                                <button
-                                   data-added = { this.state.addToLater }
-                                   className = { this.compMainClass + "__button" + " " + (this.checkedMovieInList() ? "active" : "")}
-                                   onClick={ this.setToListLate }>Хочу посмотреть</button>
-                                <a href="#"
-                                   className = { this.compMainClass + "__button"}
-                                   onClick={ this.setToListFavorites }>Добавить в избранное</a>
-                                <a href="#"
-                                   className = { this.compMainClass + "__button"}
-                                   onClick={ this.setToListWatched }>Смотрел</a>
+                                <a data-added = { this.checkedMovieInListLater() }
+                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListLater() ? "later-active" : "later") }
+                                   onClick={ this.setToListLate }><i></i>Хочу посмотреть</a>
+                                <a data-added = { this.checkedMovieInListFavorites() }
+                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListFavorites() ? "favorites-active" : "favorites")}
+                                        onClick={ this.setToListFavorites }><i></i>Добавить в избранное</a>
+                                <a data-added = { this.checkedMovieInListWatched() }
+                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListWatched() ? "watched-active" : "watched")}
+                                        onClick={ this.setToListWatched }><i></i>Смотрел</a>
                             </div>
                         </div>
                     </Row>
@@ -221,6 +358,6 @@ class PageMovieInfo extends React.PureComponent {
 export default connect (
     state => ({
         movieDetail: state.recentMoviesList,
-        listLaterMovie: state.listLaterMovies,
+        listMovie: state.myListMovies,
     }),
 ) (PageMovieInfo);

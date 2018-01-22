@@ -4,7 +4,7 @@ import { default as isoFetch } from 'isomorphic-fetch';
 import {URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 import './Block_Header.scss';
 
@@ -65,11 +65,20 @@ class BlockHeader extends React.PureComponent {
         return(
             this.state.storeApi.menuList.menuList.map( ( elem, index) => {
                 return(
-                    <li key = { index }
-                        onClick={ this.testActionClick }
-                        className = { this.compMainClass + "__menu-box_menu-item" }>
-                        <a href="">{ elem }</a>
-                    </li>
+
+                        <li key = { index }
+                            onClick={ this.testActionClick }
+                            className = { this.compMainClass + "__menu-box_menu-item" }>
+                            <NavLink to={ elem.linkTo }
+                                     exact
+                                     activeStyle={{
+                                         fontWeight: 'bold',
+                                         background: '#e50914'
+                                     }}>
+                               { elem.title }
+                            </NavLink>
+                        </li>
+
                 )
             })
         )
