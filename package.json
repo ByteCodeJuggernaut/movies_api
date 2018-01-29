@@ -40,12 +40,12 @@
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.0.0",
     "react-flexbox-grid": "^2.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   }
