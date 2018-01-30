@@ -6,6 +6,8 @@ import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import ElementHeaderSlide from './Element_HeaderSlide';
+
 import './Block_HeaderSlide.scss';
 
 
@@ -137,10 +139,10 @@ class BlockHeaderSlide extends React.PureComponent {
         // console.log("statePrimaryMovieList",statePrimaryMovieList);
         return(
             <div className = { this.compMainClass + "__container"} >
-                <div className={ this.compMainClass + "__slider" }>
-                    { this.__renderSlide(primaryMovieList) }
-                </div>
-
+                {/*<div className={ this.compMainClass + "__slider" }>*/}
+                    {/*{ this.__renderSlide(primaryMovieList) }*/}
+                {/*</div>*/}
+                <ElementHeaderSlide/>
             </div>
         )
     }

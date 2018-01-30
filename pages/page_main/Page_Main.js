@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
+
 const fetchApiData = ({actionType, fieldName, url}) =>
     isoFetch(url)
         .then(response => {
@@ -30,7 +31,6 @@ let g_settings = {
     vertical: false,
     verticalSwiping: false,
     adaptiveHeight: false
-    // initialsai
 };
 import BlockHeader from '../../components/complex/Block_Header';
 import BlockHeaderSlide from '../../components/complex/Block_HeaderSlide';
@@ -53,8 +53,8 @@ class FilmsRenderer extends React.PureComponent {
             <Slider {...g_settings} className = { this.compMainClass + "__slider_1" } key = { "dsfdsfd" }>
                 {filterList.map( ( film ) => {
                     return (
-                        <div key={ film.id }>
-                            <Link to={'/movie/'+ film.id} >
+
+                            <Link key={ film.id } to={'/movie/'+ film.id} className = { this.compMainClass + "__element-link" }>
                                 <div className = { this.compMainClass + "__element"}
                                      style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
                                     <div className = { this.compMainClass + "__overlay" }>
@@ -75,7 +75,6 @@ class FilmsRenderer extends React.PureComponent {
                                 </div>
                             </Link>
 
-                        </div>
                     )
                 } )}
             </Slider>
@@ -132,45 +131,6 @@ class PageMain extends React.Component {
 
     isNotEmpty = ( value ) => (value !== null && value !== undefined && value.length > 0);
 
-    // __renderFilms = (list) => {
-    //     console.error('!!!!!!!!list', list.length);
-    //     // let renderList = [...this.props.storeApi.movieList.popularFilmsList];
-    //     let filterList = list.filter((item) => {
-    //         if(item.poster_path !== null && item.poster_path !== undefined) {
-    //             return item;
-    //         }
-    //     });
-    //     return(
-    //         filterList.map( ( film ) => {
-    //             return (
-    //                 <div key={ film.id }>
-    //                     <Link to={'/movie/'+ film.id} >
-    //                         <div className = { this.compMainClass + "__element"}
-    //                              style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
-    //                             <div className = { this.compMainClass + "__overlay" }>
-    //                                 <div className = { this.compMainClass + "__overlay_title" }>
-    //                                     { film.title }
-    //                                 </div>
-    //                                 <div className = { this.compMainClass + "__overlay_rating" }>
-    //                                         <span>
-    //                                             { film.vote_average }
-    //                                         </span> Рейтинг
-    //                                 </div>
-    //                                 <div className = { this.compMainClass + "__overlay_plot" }>
-    //                                     {
-    //                                         (film.overview.length > 150) ?  film.overview.substring(0, 150) + "..." : film.overview
-    //                                        }
-    //                                 </div>
-    //                             </div>
-    //                         </div>
-    //                     </Link>
-    //
-    //                 </div>
-    //             )
-    //         } )
-    //     )
-    //
-    // };
 
     render() {
         // console.log("movieList", this.props.storeApi.movieList);
@@ -182,33 +142,22 @@ class PageMain extends React.Component {
                 <div className = { this.compMainClass + "__container"}>
                     <div className = { this.compMainClass + "__block-popular-films" }>
                         <h2 className = { this.compMainClass + "__block-title" }>
-                            популярные фильмы сегодня
+                            Популярные фильмы сегодня
                         </h2>
-                        {/*<Slider {...g_settings} className = { this.compMainClass + "__slider_1" } key = { "dsfdsfd" }>*/}
-                            <FilmsRenderer filmList={this.props.popularFilmsList}/>
-                            {/*{ this.__renderFilms(this.props.popularFilmsList) }*/}
-                        {/*</Slider>*/}
+                        <FilmsRenderer filmList={this.props.popularFilmsList}/>
                     </div>
                     <div className = { this.compMainClass + "__block-coming-films" }>
                         <h2 className = { this.compMainClass + "__block-title" }>
                             Скоро выходит в кинотеатрах
                         </h2>
-                        {/*<Slider {...g_settings} className = { this.compMainClass + "__slider_2" } key = { "fdsafsa" }>*/}
-                            <FilmsRenderer filmList={this.props.upcomingFilmList}/>
-                            {/*{ this.__renderFilms(this.props.upcomingFilmList) }*/}
-                        {/*</Slider>*/}
+                        <FilmsRenderer filmList={this.props.upcomingFilmList}/>
                     </div>
                     <div className = { this.compMainClass + "__block-rating-films" }>
                         <h2 className = { this.compMainClass + "__block-title" }>
                             Рейтинг лучших фильмов
                         </h2>
-                        {/*<Slider {...g_settings} className = { this.compMainClass + "__slider_3" } key = { "fdsafdfder" }>*/}
-                            <FilmsRenderer filmList={this.props.topRatedFilmList}/>
-                            {/*{ this.__renderFilms(this.props.topRatedFilmList) }*/}
-                            {/*{ this.__renderRatingFilms() }*/}
-                        {/*</Slider>*/}
+                        <FilmsRenderer filmList={this.props.topRatedFilmList}/>
                     </div>
-
                 </div >
             </div>
         )
