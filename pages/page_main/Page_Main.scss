@@ -1,57 +1,113 @@
 ﻿@import '../../core/style/variables';
 
+
 .PageMain__wrapper {
     position: relative;
     width: 100%;
     background-color: black;
     .PageMain__container {
+        display: flex;
+        position: relative;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .PageMain__block-popular-films, .PageMain__block-coming-films, .PageMain__block-rating-films {
+            margin-top: 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0 40px;
+        }
+        .PageMain__block-title {
+            font-size: 32px;
+            padding: 20px 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #efefef;
+            text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            margin-bottom: 15px;
+        }
         .PageMain__element {
             position: relative;
-            padding: 20px;
-            width: 100%;
-            height: 400px;
-            background: center no-repeat;
+            width: 225px;
+            height: 325px;
+            background: #000000 center center no-repeat;
             background-size: 100%;
-            //background-position: center;
-            //background-repeat: no-repeat;
             overflow: hidden;
-            background-color: #000000;
+            margin: 5px;
             transition: background 1s ease;
-            margin: 20px;
             & > .PageMain__overlay {
-                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.65) 60%,  rgba(0, 0, 0, 0.9) 100%);
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
                 padding: 10px;
                 position: relative;
                 height: 100%;
-                pointer-events: none;
                 opacity: 0;
                 color: lightgrey;
-
                 transition: opacity .3s ease;
                 & > .PageMain__overlay_title {
-                    font-size: 22px;
-                    font-weight: 200;
+                    margin-top: 5px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }
                 & > .PageMain__overlay_rating {
-                    font-size: 14px;
-                    font-weight: 200;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-weight: bold;
+                    margin-top: 5px;
+                    font-size: 20px;
+                    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    & > span {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        width: 50px;
+                        margin-right: 10px;
+                        height: 50px;
+                        border-radius: 50%;
+                        font-size: 20px;
+                        background-color: #ffd800;
+                        color: #da2210;
+                        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    }
                 }
                 & > .PageMain__overlay_plot {
-                    font-size: 12px;
-                    margin-top: 100px;
-                    font-weight: 300;
+                    font-size: 14px;
+                    margin-top: 20px;
+                    font-weight: 400;
                     line-height: 1.6;
+                    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 }
             }
             &:hover {
-                background-size: 130%;
+                background-size: 120%;
                 & > .PageMain__overlay {
                     opacity: 1;
                 }
             }
         }
     }
+}
 
+.slick-next:before, .slick-prev:before {
+    color: #da2210;
+}
+
+
+.PageMain__slider_1, .PageMain__slider_2, .PageMain__slider_3 {
+    & .slick-list {
+        //height: 335px;
+    }
 
 }

@@ -281,6 +281,7 @@ class PageMovieInfo extends React.PureComponent {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.9) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
         console.log("STORE", this.props);
+        console.log("movie detail", this.state.movieDetail);
 
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( !this.state.getMovieID ) return <p>Loading</p>

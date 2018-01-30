@@ -8,6 +8,8 @@ export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 export const SET_POPULAR_MOVIE_LIST = 'SET_POPULAR_MOVIE_LIST';
+export const SET_UPCOMING_MOVIE_LIST = 'SET_UPCOMING_MOVIE_LIST';
+export const SET_TOP_RATING_MOVIE_LIST = 'SET_TOP_RATING_MOVIE_LIST';
 export const SET_MOVIE_TODAY_LIST = 'SET_MOVIE_TODAY_LIST';
 export const SET_RECENT_MOVIES = 'SET_RECENT_MOVIES';
 export const FETCH_MOVIE = 'FETCH_MOVIE';
@@ -25,6 +27,8 @@ export const ADD_MOVIE_WATCHED = 'ADD_MOVIE_WATCHED';
 const defaultMovieList = {
     isFetching: false,
     popularFilmsList:[],
+    upcomingFilmList:[],
+    topRatedFilmList:[],
     error:{}
 };
 
@@ -93,7 +97,11 @@ const movieList = (state = defaultMovieList, action) => {
         case FETCH_MOVIES_FAILURE:
             return {...state, isFetching:false, error:action.data};
         case SET_POPULAR_MOVIE_LIST:
-            return {...state, isFetching:true, error:null, popularFilmsList: action.dataMovies};
+            return {...state, isFetching:false, error:null, popularFilmsList: action.dataMoviesPopular};
+        case SET_UPCOMING_MOVIE_LIST:
+            return {...state, isFetching:false, error:null, upcomingFilmList: action.dataMoviesUpcoming};
+        case SET_TOP_RATING_MOVIE_LIST:
+            return {...state, isFetching:false, error:null, topRatedFilmList: action.dataMoviesTop};
 
         default:
             return state;

@@ -194,6 +194,7 @@ class BlockHeader extends React.PureComponent {
                         { this.__renderMenuList() }
                     </ul>
                 </Col>
+                <div className = { this.compMainClass + "__search-box" }>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -202,6 +203,7 @@ class BlockHeader extends React.PureComponent {
                         getSuggestionValue={this.getSuggestionValue}
                         renderSuggestion={this.renderSuggestion}
                         inputProps={inputProps} />
+                </div>
                 <Col className = { this.compMainClass + "__account-box" }>
                     <div className = { this.compMainClass + "__account-box_container" }>
                         <div className = { this.compMainClass + "__account-box_container-title" }>
