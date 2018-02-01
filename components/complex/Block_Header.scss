@@ -108,13 +108,82 @@
         transition: all .3s ease;
         & > .BlockHeader__account-box_container {
             display: flex;
+            position: relative;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
+            & > .BlockHeader__account-box_form-signup, .BlockHeader__account-box_form-signin {
+                position: absolute;
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                top: 40px;
+                right: 20px;
+                padding: 20px;
+                background-color: rgba(49, 60, 71, 0.85);
+                border: 2px solid #da2020;
+                border-radius: 8px;
+                z-index: 100;
+                &[ data-visible = "true" ] {
+                    display: flex;
+                }
+                & > .BlockHeader__account-box_title {
+                    font-size: 18px;
+                    padding: 5px 0;
+                    color: $default-90;
+                }
+                & > .BlockHeader__account-box_info {
+                    font-size: 12px;
+                    padding: 5px 0;
+                    color: $default-50;
+                }
+                & > .BlockHeader__account-box_input {
+                    padding: 10px 15px;
+                    margin: 5px 0;
+                    border: 2px solid rgba(245, 245, 241, 0.2);
+                    border-radius: 4px;
+                    background-color: #d9d9d9;
+                    &:focus {
+                        border: 2px solid #da2020;
+                    }
+                }
+                & > button {
+                    font-size: 14px;
+                    margin-top: 20px;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    background-color: #d9d9d9;
+                    border: 2px solid transparent;
+                    &:hover {
+                        border: 2px solid #da2020;
+                        cursor: pointer;
+                    }
+                }
+            }
+            & > .BlockHeader__account-box_login {
+                font-size: 16px;
+                color: $default-50;
+                margin: 0 10px;
+                &:hover {
+                    color: $default-90;
+                    cursor: pointer;
+                }
+            }
+            & > .BlockHeader__account-box_signup {
+                font-size: 16px;
+                color: $default-50;
+                margin: 0 10px;
+                &:hover {
+                    color: $default-90;
+                    cursor: pointer;
+                }
+            }
             & > .BlockHeader__account-box_container-title {
                 font-size: $default;
                 color: $default-70;
+
             }
             & > .BlockHeader__account-box_container-icon {
                 display: block;

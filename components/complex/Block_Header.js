@@ -7,7 +7,8 @@ import {URL_LIST, URL_SEARCH, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect }                                      from 'react-redux';
 import { NavLink }                                      from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link }                                         from 'react-router-dom';
+import {popupEvents,EVENT_CLOSE_POPUPS}                 from '../../broadcast';
 
 import './Block_Header.scss';
 import { push } from "react-router-redux";
@@ -21,7 +22,10 @@ class BlockHeader extends React.PureComponent {
 
     static defaultProps = {
         accountName: "Andrew Lebowskiy",
-        accountIconURL: "/images/accounts/default.jpg"
+        isLogin:    false,
+        accountIconURL: "/images/accounts/default.jpg",
+        showSignupForm: false,
+        showSigninForm: false,
 
     };
 
@@ -35,6 +39,23 @@ class BlockHeader extends React.PureComponent {
         }
     };
 
+    componentWillUnmount() {
+        popupEvents.removeListener(EVENT_CLOSE_POPUPS,this.closePopup);
+    };
+
+    preventClosePopups = (event) => {
+        event.stopPropagation();
+    };
+
+    closePopup = () => {
+        this.setState({
+            showSignupForm: false,
+            showSigninForm: false,
+        },() => {
+            console.log("showSignupForm --->",this.state.showSignupForm);
+        });
+    };
+
     onChange = (event, { newValue }) => {
         this.setState({
             value: newValue
@@ -45,12 +66,12 @@ class BlockHeader extends React.PureComponent {
         if(event.key == 'Enter') {
             return this.handleSubmit(this.state.value);
         }
-    }
+    };
 
     handleSubmit = (searchText) => {
         this.props.dispatch(push('/search/'+ searchText));
         this.setState({ value: ''});
-    }
+    };
 
 
     getSuggestionValue = (suggestion) => {
@@ -114,6 +135,7 @@ class BlockHeader extends React.PureComponent {
     };
 
     componentDidMount() {
+        popupEvents.addListener(EVENT_CLOSE_POPUPS, this.closePopup);
         window.addEventListener('scroll', (event) => {
             let scrollY = window.pageYOffset;
             let scrollStart = 60;
@@ -142,6 +164,45 @@ class BlockHeader extends React.PureComponent {
 
     handleUnHoverImg = (e) => {
         e.currentTarget.setAttribute('src', '/images/logo-api.png');
+    };
+
+    handleSignUp = () => {
+        if( this.state.showSignupForm ) {
+            this.setState({
+                showSignupForm: false,
+                showSigninForm: false,
+            })
+        } else {
+            this.setState({
+                showSignupForm: true,
+                showSigninForm: false,
+            })
+        }
+    };
+
+    handleSignIn = () => {
+        if( this.state.showSigninForm ) {
+            this.setState({
+                showSigninForm: false,
+                showSignupForm: false,
+            })
+        } else {
+            this.setState({
+                showSigninForm: true,
+                showSignupForm: false,
+            })
+        }
+    };
+
+    submiteSignUp = () => {
+        this.setState({
+            showSignupForm: false,
+        })
+    };
+    submiteSignIn = () => {
+        this.setState({
+            showSigninForm: false,
+        })
     };
 
     __renderMenuList = () => {
@@ -205,16 +266,58 @@ class BlockHeader extends React.PureComponent {
                         inputProps={inputProps} />
                 </div>
                 <Col className = { this.compMainClass + "__account-box" }>
-                    <div className = { this.compMainClass + "__account-box_container" }>
-                        <div className = { this.compMainClass + "__account-box_container-title" }>
-                            { this.state.accountName }
-                        </div>
-                        <div className = { this.compMainClass + "__account-box_container-icon" }>
-                            <img className = { this.compMainClass + "__account-box_container-icon_image" }
-                                 src = { this.state.accountIconURL }
-                                 alt = ""/>
-                        </div>
-                    </div>
+                    {
+                        ( this.state.isLogin ) ?
+                            <div className = { this.compMainClass + "__account-box_container" }>
+                                <div className = { this.compMainClass + "__account-box_container-title" }>
+                                    { this.state.accountName }
+                                </div>
+                                <div className = { this.compMainClass + "__account-box_container-icon" }>
+                                    <img className = { this.compMainClass + "__account-box_container-icon_image" }
+                                         src = { this.state.accountIconURL }
+                                         alt = ""/>
+                                </div>
+                            </div>
+                            :
+                            <div className = { this.compMainClass + "__account-box_container" }>
+                                <a href="#"
+                                   className = { this.compMainClass + "__account-box_signup" }
+                                   onClick = { this.handleSignUp }>
+                                    Регистрация
+                                </a>
+                                <a href="#" className = { this.compMainClass + "__account-box_login" }
+                                   onClick = { this.handleSignIn }>
+                                    Войти
+                                </a>
+                                        <div className = { this.compMainClass + "__account-box_form-signup" }
+                                             data-visible = { this.state.showSignupForm }
+                                             onMouseDown = { this.preventClosePopups }>
+                                            <h4 className = { this.compMainClass + "__account-box_title" }>
+                                                Регистрация
+                                            </h4>
+                                            <p className = { this.compMainClass + "__account-box_info" }>
+                                                Введите свои данные:
+                                            </p>
+                                            <input type="text" className = { this.compMainClass + "__account-box_input" } placeholder = "Логин"/>
+                                            <input type="password" className = { this.compMainClass + "__account-box_input" } placeholder = "Пароль"/>
+                                            <button onClick = { this.submiteSignUp }>Зарегестрироваться</button>
+                                        </div>
+                                        <div className = { this.compMainClass + "__account-box_form-signin" }
+                                             data-visible = { this.state.showSigninForm }
+                                             onMouseDown = { this.preventClosePopups }>
+                                            <h4 className = { this.compMainClass + "__account-box_title" }>
+                                                Войти
+                                            </h4>
+                                            <p className = { this.compMainClass + "__account-box_info" }>
+                                                Введите свои данные:
+                                            </p>
+                                            <input type="text" className = { this.compMainClass + "__account-box_input" } placeholder = "Логин"/>
+                                            <input type="password" className = { this.compMainClass + "__account-box_input" } placeholder = "Пароль"/>
+                                            <button onClick = { this.submiteSignIn }>Войти</button>
+                                        </div>
+                            </div>
+                    }
+
                 </Col>
             </Row>
 

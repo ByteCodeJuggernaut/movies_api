@@ -29,8 +29,6 @@ class BlockHeaderSlide extends React.PureComponent {
 
     componentDidMount() {
         let dataToday = new Date();
-
-
         let url = URL_NOW_PLAYING + API_KEY + LANGUAGE + REGION;
         isoFetch( url )
             .then( response => {
@@ -59,85 +57,6 @@ class BlockHeaderSlide extends React.PureComponent {
 
     compMainClass = "BlockHeaderSlide";
 
-    __renderSlide = (array) => {
-        let elem = {...array[0]};
-        let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + elem.backdrop_path;
-        let styleSlide = {
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.4) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
-        };
-        // console.log('elem.overview.length', elem.overview);
-        return(
-            <div className = { this.compMainClass + "__slide" } style={ styleSlide } >
-                <div className = { this.compMainClass + "__left-side" }>
-                    <div className = { this.compMainClass + "__head-title" }>
-                        Сегодня в кинотеатрах
-                    </div>
-                    <div className = { this.compMainClass + "__title" }>
-                        { elem.title }
-                    </div>
-                    <div className = { this.compMainClass + "__popularity" }>
-                       Популярность:
-                        <span>
-                            { Number(elem.popularity).toFixed(2) }
-                        </span>
-
-                    </div>
-                    <div className = { this.compMainClass + "__data-release" }>
-                        Дата выхода:
-                        <span>
-                            { elem.release_date  }
-                        </span>
-                    </div>
-                    <div className = { this.compMainClass + "__description" }>
-                        {  elem.overview }
-                    </div>
-                    <div className = { this.compMainClass + "__button" }>
-                        <Link to={'/movie/'+ elem.id}>
-                            <button>
-                                Подробнее
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className = { this.compMainClass + "__right-side" }>
-                    <div className = { this.compMainClass + "__poster" }>
-                        <img className = { this.compMainClass + "__poster-image" }
-                             src={ URL_IMG + IMG_SIZE_LARGE + elem.poster_path } alt=""/>
-                    </div>
-                </div>
-            </div>
-        )
-
-        // return(
-        //     elem.map( (item, index) =>  {
-        //         return(
-        //             <div key={ index }>
-        //                 <Col lg={8}>
-        //                     <div>
-        //                         { item.title }
-        //                     </div>
-        //                     <div>
-        //                         { item.popularity }
-        //
-        //                     </div>
-        //                     <div>
-        //                         { item.release_date }
-        //                     </div>
-        //                     <div>
-        //                         { item.overview }
-        //                     </div>
-        //                 </Col>
-        //                 <Col lg={4}>
-        //                     <div>
-        //                         <img src={ URL_IMG + IMG_SIZE_LARGE + item.poster_path } alt=""/>
-        //                     </div>
-        //                 </Col>
-        //             </div>
-        //         )
-        //     } )
-        // )
-
-    };
 
     render() {
         let primaryMovieList = [...this.props.primaryMovieList.dataPrimary];

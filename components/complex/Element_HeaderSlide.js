@@ -71,19 +71,17 @@ class ElementHeaderSlide extends React.PureComponent {
                 return(
                     <div className = { compMainClass + "__slide" }
                          key = { film.id }
-                         style={{  backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.7)" +
+                         style={{  background: "linear-gradient(to bottom, rgba(0,0,0,0.7)" +
                              " 0%,rgba(0,0,0,0.4) 100%)," +  "url(" + URL_IMG + BACKDROP_SIZE_ORIGINAL + film.backdrop_path + ")" + " no-repeat center center" }} >
                         <div className = { compMainClass + "__left-side" }>
-                            <div className = { compMainClass + "__head-title" }>
-                                Сегодня в кинотеатрах
-                            </div>
+
                             <div className = { compMainClass + "__title" }>
                                 { film.title }
                             </div>
                             <div className = { compMainClass + "__popularity" }>
-                                Популярность:
+                                Рейтинг:
                                 <span>
-                                    { Number(film.popularity).toFixed(2) }
+                                    { film.vote_average }
                                 </span>
                             </div>
                             <div className = { compMainClass + "__data-release" }>
@@ -121,6 +119,9 @@ class ElementHeaderSlide extends React.PureComponent {
     render() {
         return(
                 <div className={ compMainClass + "__slider" }>
+                    <div className = { compMainClass + "__head-title" }>
+                        Сегодня в кинотеатрах
+                    </div>
                     <Slider { ...g_settings }>
                         { this.__renderSlide(this.props.primaryMovieList.dataPrimary) }
                     </Slider>

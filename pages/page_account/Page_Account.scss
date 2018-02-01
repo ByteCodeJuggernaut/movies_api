@@ -1,0 +1,65 @@
+@import '../../core/style/variables';
+
+.PageAccount__wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    color: $default-90;
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0.7) 100%), url("/images/movieflix-background.jpg") no-repeat center center fixed;
+    & > .PageAccount__container {
+        display: block;
+        position: relative;
+        padding-top: 200px;
+        //background-color: black;
+
+        & > .PageAccount__account {
+            color: #da2020;
+            font-size: 26px;
+            font-weight: bold;
+            padding: 20px 0;
+            margin-bottom: 15px;
+        }
+        & > .PageAccount__container-watched {
+
+        }
+    }
+    & .PageAccount__film {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all .4s ease;
+        margin: 15px 0;
+        border-radius: 8px;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(211, 211, 211, 0.31);
+        }
+        & > .PageAccount__film_poster {
+            display: block;
+            padding: 20px;
+            & > img {
+                display: block;
+                width: 150px;
+                height: auto;
+                border-radius: 8px;
+            }
+        }
+        & > .PageAccount__film_information {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            color: $default-90;
+            & > .PageAccount__film_information-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            & > .PageAccount__film_information-description {
+                font-size: 16px;
+            }
+        }
+    }
+}
