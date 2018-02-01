@@ -4,7 +4,7 @@ import { default as isoFetch } from 'isomorphic-fetch';
 import {URL_LIST, LANGUAGE, SORT_POPULARITY, REGION, ADULTS, URL_NOW_PLAYING, DATA_RELEASE_START, DATA_RELEASE_END, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, BACKDROP_SIZE_LARGE, BACKDROP_SIZE_ORIGINAL, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
 import './Element_HeaderSlide.scss';
@@ -13,14 +13,14 @@ const compMainClass = "ElementHeaderSlide";
 
 let g_settings = {
     dots: false,
-    fade: true,
-    autoplay: true,
+    fade: false,
+    autoplay: false,
     centerPadding: '0px',
     arrows: false,
     draggable: true,
     infinite: true,
     centerMode: true,
-    autoplaySpeed: 1000,
+    // autoplaySpeed: 100,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -44,33 +44,7 @@ class ElementHeaderSlide extends React.PureComponent {
     };
 
     componentDidMount() {
-        // let dataToday = new Date();
-        //
-        //
-        // let url = URL_NOW_PLAYING + API_KEY + LANGUAGE + REGION;
-        // isoFetch( url )
-        //     .then( response => {
-        //         if ( !response.ok ) {
-        //             throw Error( "Ошибка запроса" )
-        //         }
-        //         return response;
-        //     } )
-        //     .then( data => data.json() )
-        //     .then( data => {
-        //         this.setState( {
-        //             getPrimaryFilms: data.results,
-        //         }, () => {
-        //             // console.log( "MOVIE_TODAY_LIST: ", this.state.getData.results );
-        //             this.props.dispatch({
-        //                 type: "SET_MOVIE_TODAY_LIST",
-        //                 dataPrimary: this.state.getPrimaryFilms,
-        //             })
-        //         } );
-        //     }, () => {
-        //         this.setState( {
-        //             requestFailed: true,
-        //         } )
-        //     } )
+
     };
 
     __renderSlide = (array) => {
@@ -95,7 +69,10 @@ class ElementHeaderSlide extends React.PureComponent {
         return(
             filterFilmsList.map(( film ) => {
                 return(
-                    <div className = { compMainClass + "__slide" } key = { film.id } style={{  background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.4) 100%)," +  "url(" + URL_IMG + BACKDROP_SIZE_ORIGINAL + film.backdrop_path + ")" + " no-repeat center center fixed" }} >
+                    <div className = { compMainClass + "__slide" }
+                         key = { film.id }
+                         style={{  backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.7)" +
+                             " 0%,rgba(0,0,0,0.4) 100%)," +  "url(" + URL_IMG + BACKDROP_SIZE_ORIGINAL + film.backdrop_path + ")" + " no-repeat center center" }} >
                         <div className = { compMainClass + "__left-side" }>
                             <div className = { compMainClass + "__head-title" }>
                                 Сегодня в кинотеатрах
@@ -106,18 +83,24 @@ class ElementHeaderSlide extends React.PureComponent {
                             <div className = { compMainClass + "__popularity" }>
                                 Популярность:
                                 <span>
-                            { Number(film.popularity).toFixed(2) }
-                        </span>
-
+                                    { Number(film.popularity).toFixed(2) }
+                                </span>
                             </div>
                             <div className = { compMainClass + "__data-release" }>
                                 Дата выхода:
                                 <span>
-                            { film.release_date  }
-                        </span>
+                                    { film.release_date  }
+                                </span>
                             </div>
                             <div className = { compMainClass + "__description" }>
                                 {  (film.overview.length > 400) ?  film.overview.substring(0, 400) + "..." : film.overview }
+                            </div>
+                            <div className = { compMainClass + "__link-to-movie" }>
+                                <Link to={'/movie/'+ film.id}>
+                                    <button className = { compMainClass + "__link-to-movie_button" }>
+                                        Подробнее
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                         <div className = { compMainClass + "__right-side" }>

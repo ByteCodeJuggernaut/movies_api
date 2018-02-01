@@ -32,6 +32,11 @@ const defaultMovieList = {
     error:{}
 };
 
+const defaultAccount = {
+    accountName: 'Andrey Lebowskiy',
+    accountImageUrl: '#',
+};
+
 const defaultPrimaryMovieList = {
     isFetching: false,
     dataPrimary:[],
@@ -79,6 +84,15 @@ const defaultMenuList = {
             linkTo: '/recently',
         },
     ]
+};
+
+const accountDetail = ( state = defaultAccount, action ) => {
+    switch ( action.type ){
+        case FETCH_MOVIES:
+            return {...state, isFetching:true};
+        default:
+            return state;
+    }
 };
 
 const menuList = ( state = defaultMenuList, action ) => {
@@ -173,6 +187,7 @@ const moviesApi = combineReducers({
     recentMoviesList,
     movieDetail,
     myListMovies,
+    accountDetail,
     routing: routerReducer
 
 });

@@ -13,6 +13,7 @@ import movieApp                                         from './reducers';
 import App                                              from './App';
 
 import PageMain                                         from './pages/page_main/Page_Main';
+import PageAccount                                      from './pages/page_account/Page_Account';
 import PageMovieInfo                                    from './pages/page_movie_info/Page_MovieInfo';
 import BlockHeader                                      from './components/complex/Block_Header';
 
@@ -33,6 +34,7 @@ ReactDOM.render(
                 <BlockHeader/>
 
                     <Route exact path="/" component = { PageMain }/>
+                    {/*<Route exact path="/" component = { PageAccount }/>*/}
                     <Route path="/movie/:id" component = { PageMovieInfo }/>
 
             </div>
