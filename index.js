@@ -33,8 +33,8 @@ ReactDOM.render(
             <div>
                 <BlockHeader/>
 
-                    {/*<Route exact path="/" component = { PageMain }/>*/}
-                    <Route exact path="/" component = { PageAccount }/>
+                    <Route exact path="/" component = { PageMain }/>
+                    <Route path="/mylist" component = { PageAccount }/>
                     <Route path="/movie/:id" component = { PageMovieInfo }/>
 
             </div>

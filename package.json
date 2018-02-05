@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
@@ -36,9 +37,14 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "es6-promise": "^4.1.1",
     "events": "^1.1.1",
+    "express": "^4.16.2",
+    "g": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^5.0.3",
+    "npm": "^5.6.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-autosuggest": "^9.3.2",
