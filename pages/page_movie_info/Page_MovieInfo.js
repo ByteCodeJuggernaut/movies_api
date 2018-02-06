@@ -272,8 +272,6 @@ class PageMovieInfo extends React.PureComponent {
         return addedMovie;
     };
 
-
-
     render() {
         let movieDetail = {...this.props.movieDetail.recentMovies};
         let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + movieDetail.backdrop_path;

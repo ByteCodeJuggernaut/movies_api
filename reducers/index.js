@@ -317,7 +317,7 @@ const movieList = (state = defaultMovieList, action) => {
         case SET_UPCOMING_MOVIE_LIST:
             return {...state, isFetching:false, error:null, upcomingFilmList: action.dataMoviesUpcoming};
         case SET_TOP_RATING_MOVIE_LIST:
-            return {...state, isFetching:false, error:null, topRatedFilmList: action.dataMoviesTop};
+            return {...state, isFetching:false, error:null, topRatedFilmList: action.dataMoviesTop };
 
         default:
             return state;

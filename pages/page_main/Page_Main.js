@@ -6,6 +6,7 @@ import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
+import { getMovies } from '../../actions/actions';
 
 
 const fetchApiData = ({actionType, fieldName, url}) =>
@@ -109,6 +110,12 @@ class PageMain extends React.Component {
     compMainClass = "PageMain";
 
     componentDidMount() {
+        console.warn('componentDidMount');
+
+        // this.props.getMovies();
+
+        this.props.dispatch(getMovies());
+
         let urlPopular = URL_POPULAR + API_KEY + LANGUAGE + REGION;
         let urlUpcoming = URL_LIST_UPCOMING + API_KEY + LANGUAGE + REGION;
         let urlTopRated = URL_LIST_TOP_RATED + API_KEY + LANGUAGE + REGION;
@@ -165,6 +172,10 @@ class PageMain extends React.Component {
 
 }
 
+// const mapDispatch = dispatch => ({
+//     getMovies: () => dispatch(getMovies())
+// });
+
 export default connect (
     state => ({
         // storeApi: state,
@@ -172,6 +183,7 @@ export default connect (
         upcomingFilmList: state.movieList.upcomingFilmList,
         topRatedFilmList: state.movieList.topRatedFilmList
     }),
+    // mapDispatch
 ) (PageMain);
 //
 // isoFetch( urlPopular )

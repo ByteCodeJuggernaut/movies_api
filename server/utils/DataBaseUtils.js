@@ -1,18 +1,37 @@
-import mongoose from 'mongoose';
+'use strict';
 
-import '../models/app_library';
+// const mongoose = require ('mongoose');
+// import '../models/app_library';
 
-const Movieflix = mongoose.model('Movieflix');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-export function setUpConnection() {
-    mongoose.connect(`mongodb://localhost/movieflix`)
+const schema = new Schema({
+    name: {
+        type: String,
+        required: true
+    }
+});
+
+class MoovieModel {
+    // add additional class/instance methods here
 }
 
-export function listMovies() {
+schema.loadClass(MoovieModel);
+
+const Movieflix = mongoose.model('MoovieModel', schema);
+
+// const Movieflix = mongoose.model('Movieflix');
+// export function setUpConnection() {
+//     mongoose.connect(`mongodb://localhost/movieflix`)
+// }
+
+function listMovies() {
+    console.log('calling listMovies');
     return Movieflix.find();
 }
 
-export function addMovies(data) {
+function addMovies(data) {
     const moviesList = new Movieflix ({
         watchLater: data.watchLater,
         watchFavorites: data.watchFavorites,
@@ -21,6 +40,12 @@ export function addMovies(data) {
     return moviesList.save();
 }
 
-export function deleteMovie(id) {
+function deleteMovie(id) {
     return Movieflix.findById(id).remove();
 }
+
+module.exports = {
+    listMovies,
+    addMovies,
+    deleteMovie
+};

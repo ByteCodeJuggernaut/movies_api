@@ -74,3 +74,47 @@ export function fetchMovieList(option){
             .catch( error => dispatch( fetchMoviesFail(error) ) )
     }
 }
+
+// !!!! returns films
+//127.0.0.1:8089/movieflix GET type applications/json
+// fetch(params) !!!GET !!!JSON
+//.json()
+//
+
+const apiUrl1 = 'http://localhost:8089/movieflix';
+const opts = {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+};
+
+const apiFetch = () => {
+    console.warn('apiFetch');
+    return isoFetch(apiUrl1, opts)
+        .then(response => {
+            console.warn('apiFetch2', response);
+            if (!response.ok ) {
+                throw Error( "Ошибка запроса" )
+            }
+            console.warn('apiFetch');
+            return response;
+        })
+        .then(data => data.json());
+}
+
+
+export const getMovies = () => dispatch => {
+    console.warn('getMovies1');
+    dispatch(fetchMovie()); // fetcing: true
+    console.warn('getMovies2');
+    apiFetch().then(fetchMoviesSuccess).catch(fetchMovieFail);
+}
+
+postData =
+// export getFilms() {
+//dispatch(startFetchFilsh());
+//apiFetchFilms()
+//dispatch(finishFetchFilms())
+// }
