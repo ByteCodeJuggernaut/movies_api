@@ -112,7 +112,7 @@ export const getMovies = () => dispatch => {
     apiFetch().then(fetchMoviesSuccess).catch(fetchMovieFail);
 }
 
-postData =
+// postData =
 // export getFilms() {
 //dispatch(startFetchFilsh());
 //apiFetchFilms()
