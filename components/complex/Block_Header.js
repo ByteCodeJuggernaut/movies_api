@@ -118,9 +118,9 @@ class BlockHeader extends React.PureComponent {
             <Link to={'/movie/'+ suggestion.id} >
                 <img className="searchResult-image" src= {suggestion.img == null ? "#" : URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
                 <div className="searchResult-text">
-                    <div className="searchResult-name">
+                    <p className="searchResult-name">
                         {suggestion.title}
-                    </div>
+                    </p>
                     {suggestion.year}
                 </div>
             </Link>
@@ -211,7 +211,6 @@ class BlockHeader extends React.PureComponent {
                 return(
 
                         <li key = { index }
-                            onClick={ this.testActionClick }
                             className = { this.compMainClass + "__menu-box_menu-item" }>
                             <NavLink to={ elem.linkTo }
                                      exact
@@ -236,7 +235,7 @@ class BlockHeader extends React.PureComponent {
             onChange: this.onChange,
             onKeyPress: this.handleKeyDown,
             type: 'search',
-            placeholder: 'Search Movie Title...'
+            placeholder: 'Поиск фильмов...'
         };
         return(
             <div>

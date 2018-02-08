@@ -1,4 +1,4 @@
-
+@import '../../core/style/variables';
 
 .Cast {
     display: flex;
@@ -7,6 +7,13 @@
     flex-wrap: wrap;
     align-items: center;
     flex: 1 1 15%;
+    @include medium-screen {
+
+    }
+    @include small-screen {
+        flex: 1 1 30%;
+        margin: 10px;
+    }
     & > .Cast__poster {
         position: relative;
         display: flex;

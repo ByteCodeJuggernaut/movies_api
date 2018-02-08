@@ -48,8 +48,8 @@
             @include x-small-screen {
                 flex: 1 1 100%;
                 align-items: center;
-                padding: 0;
                 margin-top: 20px;
+                padding: 30px;
             }
             & .ElementHeaderSlide__title {
                 display: block;
@@ -70,7 +70,7 @@
                     font-size: 35px;
                 }
                 @include small-screen {
-                    font-size: 24px;
+                    font-size: 30px;
                     padding: 5px;
                 }
                 @include x-small-screen {
@@ -93,6 +93,9 @@
                 }
                 @include small-screen {
                     font-size: 18px;
+                }
+                @include x-small-screen {
+                    display: none;
                 }
                 & > span {
                     margin-left: 20px;
@@ -124,6 +127,9 @@
                     font-size: 16px;
                     margin-bottom: 10px;
                 }
+                @include x-small-screen {
+                    display: none;
+                }
                 & > span {
                     font-weight: bold;
                     margin-left: 20px;
@@ -146,6 +152,10 @@
                     font-size: 14px;
                     margin-bottom: 10px;
                     padding: 5px;
+                }
+                @include x-small-screen {
+                    font-size: 16px;
+                    padding: 0 40px;
                 }
 
             }
@@ -195,6 +205,7 @@
                 flex: 1 1 100%;
                 padding: 0;
                 width: 100%;
+                margin-top: 180px;
             }
             & .ElementHeaderSlide__poster {
                 display: flex;
@@ -245,6 +256,12 @@
     letter-spacing: 5px;
     z-index: 10;
     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    @include x-small-screen {
+        right: 0;
+        top: 100px;
+        transform: translateX(-50%);
+        padding: 0;
+    }
 }
 
 .slick-active {

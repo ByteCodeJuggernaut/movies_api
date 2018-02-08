@@ -31,7 +31,18 @@ let g_settings = {
     slidesToScroll: 2,
     vertical: false,
     verticalSwiping: false,
-    adaptiveHeight: false
+    adaptiveHeight: false,
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: { slidesToShow: 4 }
+        },
+        {
+            breakpoint: 1378,
+            settings: { slidesToShow: 5 }
+        },
+
+    ]
 };
 import BlockHeader from '../../components/complex/Block_Header';
 import BlockHeaderSlide from '../../components/complex/Block_HeaderSlide';
@@ -51,7 +62,7 @@ class FilmsRenderer extends React.PureComponent {
             }
         });
         return(
-            <Slider {...g_settings} className = { this.compMainClass + "__slider_1" } key = { "dsfdsfd" }>
+            <Slider {...g_settings} className = { this.compMainClass + "__slider_1" } key = { "dsfdsfd" } >
                 {filterList.map( ( film ) => {
                     return (
 

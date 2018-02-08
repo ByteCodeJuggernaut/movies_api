@@ -46,6 +46,17 @@
                 transition: background 1s ease;
                 box-shadow: 0 3px 10px rgba(0,0,0,0.35), 0 5px 5px rgba(0,0,0,0.15);
                 border-radius: 8px;
+                @include medium-screen {
+                    width: auto;
+                    height: 250px;
+                    background-size: 100%;
+                }
+                @include small-screen {
+                    height: 300px;
+                }
+                @include x-small-screen {
+                    height: 270px;
+                }
                 & > .PageMain__overlay {
                     display: flex;
                     flex-direction: column;
@@ -59,11 +70,16 @@
                     opacity: 0;
                     color: lightgrey;
                     transition: opacity .3s ease;
+
                     & > .PageMain__overlay_title {
                         margin-top: 5px;
                         font-size: 24px;
                         font-weight: bold;
                         text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                        @include medium-screen {
+                            font-size: 22px;
+                            font-weight: 500;
+                        }
                     }
                     & > .PageMain__overlay_rating {
                         display: flex;
@@ -74,6 +90,9 @@
                         margin-top: 5px;
                         font-size: 20px;
                         text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                        @include medium-screen {
+                            font-size: 14px;
+                        }
                         & > span {
                             display: flex;
                             align-items: center;
@@ -87,6 +106,11 @@
                             background-color: #ffd800;
                             color: #da2210;
                             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                            @include medium-screen {
+                                font-size: 16px;
+                                width: 30px;
+                                height: 30px;
+                            }
                         }
                     }
                     & > .PageMain__overlay_plot {
@@ -95,6 +119,21 @@
                         font-weight: 400;
                         line-height: 1.6;
                         text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                        @include medium-screen {
+                            font-size: 14px;
+                            overflow: hidden;
+                            margin-top: 10px;
+                            line-height: 1.2;
+                        }
+                        @include small-screen {
+                            font-size: 14px;
+                            overflow: hidden;
+                            margin-top: 10px;
+                            line-height: 1.2;
+                        }
+                        @include x-small-screen {
+                            font-size: 15px;
+                        }
                     }
                 }
                 &:hover {

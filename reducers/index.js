@@ -287,10 +287,6 @@ const defaultMenuList = {
             title: 'Мой список',
             linkTo: '/mylist',
         },
-        {
-            title: 'Недавние',
-            linkTo: '/recently',
-        },
     ]
 };
 

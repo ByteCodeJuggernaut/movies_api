@@ -12,7 +12,7 @@ const ExtractSass = new ExtractTextPlugin({
 export default new Config().merge({
     entry: './index.js',
     output: {
-    path: __dirname + '/public',
+        path: __dirname + '/public',
     },
     module: {
         rules:[

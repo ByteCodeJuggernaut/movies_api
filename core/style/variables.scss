@@ -29,8 +29,8 @@ $default-90: rgba(255, 255, 255, 0.9);
 
 $container-large: 1396px;
 $container-medium: 1152px;
-$container-small: 848px;
-$container-tablet: 704px;
+$container-small: 950px;
+$container-tablet: 100%;
 $container-mobile: 288px;
 
 @mixin xlarge-screen() {
@@ -52,7 +52,7 @@ $container-mobile: 288px;
 }
 
 @mixin small-screen() {
-    @media all and (min-width: 1250px) {
+    @media all and (max-width: 1250px) {
         @content;
     }
 }

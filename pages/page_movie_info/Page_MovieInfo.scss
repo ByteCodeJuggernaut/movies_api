@@ -6,6 +6,9 @@
     background-size: 100%!important;
     padding-top: 30px;
     height: 100%;
+    @include medium-screen {
+        background-size: cover!important;
+    }
     & > .PageMovieInfo__container {
         & > .PageMovieInfo__row {
             display: flex;
@@ -23,11 +26,17 @@
                 position: relative;
                 justify-content: center;
                 align-items: stretch;
+                @include medium-screen {
+                    flex: 1 1 30%;
+                }
                 & > .PageMovieInfo__left-column_poster {
                     display: block;
                     max-width: 400px;
                     border-radius: 10px;
                     box-shadow: 0 14px 28px rgba(0,0,0,0.85), 0 10px 10px rgba(0,0,0,0.55);
+                    @include medium-screen {
+                        width: 100%;
+                    }
                 }
             }
             & > .PageMovieInfo__right-column {
@@ -36,6 +45,12 @@
                 flex-wrap: wrap;
                 flex: 1 1 70%;
                 padding: 20px 50px;
+                @include medium-screen {
+                    padding: 10px 40px;
+                }
+                @include small-screen {
+                    padding: 10px 20px;
+                }
                 & > .PageMovieInfo__title {
                     font-size: $h0;
                     font-weight: bold;
@@ -43,6 +58,13 @@
                     color: $default-90;
                     line-height: 1.2;
                     text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                    @include medium-screen {
+                        font-size: 34px;
+                        margin-bottom: 20px;
+                    }
+                    @include small-screen {
+                        font-size: 24px;
+                    }
                 }
                 & > .PageMovieInfo__quote {
                     font-size: $h2;
@@ -51,6 +73,13 @@
                     color: $default-90;
                     margin-bottom: 20px;
                     text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                    @include medium-screen {
+                        font-size: 24px;
+                    }
+                    @include small-screen {
+                        font-size: 18px;
+                        margin-bottom: 5px;
+                    }
                 }
                 & > .PageMovieInfo__inline-block {
                     display: flex;
@@ -59,6 +88,9 @@
                     align-items: stretch;
                     justify-content: flex-start;
                     margin-bottom: 20px;
+                    @include medium-screen {
+                        margin-bottom: 10px;
+                    }
                     & > .PageMovieInfo__data-release {
                         display: flex;
                         flex-direction: row;
@@ -69,6 +101,12 @@
                         margin-right: 30px;
                         color: #da2210;
                         text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                        @include medium-screen {
+                            margin-right: 15px;
+                        }
+                        @include small-screen {
+                            padding: 0;
+                        }
                     }
                     & > .PageMovieInfo__votes {
                         display: flex;
@@ -80,6 +118,12 @@
                         margin-right: 30px;
                         color: #f3b50e;
                         text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                        @include medium-screen {
+                            margin-right: 15px;
+                        }
+                        @include small-screen {
+                            padding: 0;
+                        }
                     }
                     & > .PageMovieInfo__votes-count {
                         display: flex;
@@ -91,6 +135,12 @@
                         margin-right: 30px;
                         color: #22a7ff;
                         text-shadow: 0 3px 3px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+                        @include medium-screen {
+                            margin-right: 15px;
+                        }
+                        @include small-screen {
+                            padding: 0;
+                        }
                     }
                     & .PageMovieInfo__inline-block_icon {
                         width: 50px;
@@ -98,6 +148,10 @@
                         margin-right: 15px;
                         //box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
                         overflow: hidden;
+                        @include small-screen {
+                            width: 30px;
+                            height: 30px;
+                        }
                         & > img {
                             display: block;
                             width: 100%;
@@ -115,6 +169,14 @@
                     text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
                     margin-bottom: 20px;
                     color: $default-90;
+                    @include medium-screen {
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                    }
+                    @include small-screen {
+                        font-size: 16px;
+                        line-height: 1.2;
+                    }
                 }
                 & > .PageMovieInfo__block-button {
                     display: flex;
@@ -140,6 +202,9 @@
                         border: 1px solid #000000;
                         justify-content: flex-start;
                         transition: all .4s ease;
+                        @include small-screen {
+                            width: auto;
+                        }
                         &:hover {
                             background-color: rgba(240, 240, 240, 0.7);
                             cursor: pointer;
@@ -254,6 +319,9 @@
                         background-color: rgba(178, 178, 178, 0.5);
                         border: 1px solid #000000;
                         border-radius: 15px;
+                        @include medium-screen {
+                            width: 230px;
+                        }
                         &:hover {
                             cursor: pointer;
                             background-color: rgba(249, 249, 249, 0.5);
@@ -266,6 +334,10 @@
                             margin-right: 10px;
                             background: url("/images/youtube_icon.png") no-repeat center center;
                             background-size: 100%;
+                            @include medium-screen {
+                                width: 30px;
+                                height: 30px;
+                            }
                         }
                     }
                 }
@@ -280,6 +352,9 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 3px 3px rgba(0, 0, 0, 0.35), 0 2px 2px rgba(0, 0, 0, 0.15);
+            @include small-screen {
+                padding: 15px;
+            }
             & > h3 {
                 font-size: 24px;
                 color: rgba(255, 255, 255, 0.9);
@@ -319,6 +394,12 @@
                 align-items: stretch;
                 justify-content: center;
                 padding: 15px;
+                @include medium-screen {
+                    align-items: center;
+                }
+                @include small-screen {
+                    align-items: center;
+                }
             }
         }
     }
