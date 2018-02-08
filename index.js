@@ -32,7 +32,6 @@ ReactDOM.render(
         <Router>
             <div>
                 <BlockHeader/>
-
                     <Route exact path="/" component = { PageMain }/>
                     <Route path="/mylist" component = { PageAccount }/>
                     <Route path="/movie/:id" component = { PageMovieInfo }/>

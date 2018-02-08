@@ -22,7 +22,7 @@ class BlockHeader extends React.PureComponent {
 
     static defaultProps = {
         accountName: "Andrew Lebowskiy",
-        isLogin:    false,
+        isLogin:    true,
         accountIconURL: "/images/accounts/default.jpg",
         showSignupForm: false,
         showSigninForm: false,

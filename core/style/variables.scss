@@ -33,6 +33,11 @@ $container-small: 848px;
 $container-tablet: 704px;
 $container-mobile: 288px;
 
+@mixin xlarge-screen() {
+    @media all and (min-width: 1850px) {
+        @content;
+    }
+}
 
 @mixin large-screen() {
     @media all and (min-width: 1450px) {
@@ -47,13 +52,13 @@ $container-mobile: 288px;
 }
 
 @mixin small-screen() {
-    @media all and (max-width: 1250px) {
+    @media all and (min-width: 1250px) {
         @content;
     }
 }
 
-@mixin xsmall-screen() {
-    @media all and (max-width: 860px) {
+@mixin x-small-screen() {
+    @media all and (max-width: 1060px) {
         @content;
     }
 }

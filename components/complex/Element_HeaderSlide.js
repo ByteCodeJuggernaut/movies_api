@@ -13,14 +13,14 @@ const compMainClass = "ElementHeaderSlide";
 
 let g_settings = {
     dots: false,
-    fade: false,
+    fade: true,
     autoplay: false,
     centerPadding: '0px',
     arrows: false,
     draggable: true,
     infinite: true,
     centerMode: true,
-    // autoplaySpeed: 100,
+    autoplaySpeed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,

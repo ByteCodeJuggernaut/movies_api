@@ -6,6 +6,10 @@
     height: 100vh;
     min-height:100vh;
     width: 100%;
+    @include x-small-screen {
+        height: 100%;
+        min-height:100%;
+    }
     & .ElementHeaderSlide__slide {
         display: flex;
         position: relative;
@@ -17,19 +21,36 @@
         overflow: hidden;
         align-items: center;
         justify-content: center;
-        //background-position: center center !important;
-        //background-repeat: no-repeat !important;
-        //background-attachment: fixed !important;
         background-size: cover!important;
+        @include x-small-screen {
+            height: 100%;
+            min-height:auto;
+            flex-direction: column-reverse;
+        }
         & .ElementHeaderSlide__left-side {
             display: flex;
             position: relative;
             flex-direction: column;
             flex-wrap: wrap;
-            flex: 2 2 65%;
+            flex: 1 1 65%;
             justify-content: center;
             align-items: stretch;
             padding-right: 8%;
+            @include large-screen {
+                flex: 1 1 60%;
+            }
+            @include medium-screen {
+                flex: 1 1 70%;
+            }
+            @include small-screen {
+                flex: 1 1 70%;
+            }
+            @include x-small-screen {
+                flex: 1 1 100%;
+                align-items: center;
+                padding: 0;
+                margin-top: 20px;
+            }
             & .ElementHeaderSlide__title {
                 display: block;
                 position: relative;
@@ -42,6 +63,21 @@
                 font-weight: bold;
                 padding: 15px 10px;
                 text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                @include large-screen {
+                    font-size: 45px;
+                }
+                @include medium-screen {
+                    font-size: 35px;
+                }
+                @include small-screen {
+                    font-size: 24px;
+                    padding: 5px;
+                }
+                @include x-small-screen {
+                    font-size: 20px;
+                    padding: 5px;
+                    text-align: center;
+                }
             }
             & .ElementHeaderSlide__popularity {
                 display: block;
@@ -52,11 +88,23 @@
                 padding: 0 10px;
                 text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                 margin-bottom: 10px;
+                @include medium-screen {
+                    font-size: 20px;
+                }
+                @include small-screen {
+                    font-size: 18px;
+                }
                 & > span {
                     margin-left: 20px;
                     font-weight: bold;
                     font-size: 36px;
                     color: #ffd800;
+                    @include medium-screen {
+                        font-size: 30px;
+                    }
+                    @include small-screen {
+                        font-size: 24px;
+                    }
                 }
             }
             & .ElementHeaderSlide__data-release {
@@ -68,6 +116,14 @@
                 padding: 0 10px;
                 margin-bottom: 30px;
                 text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                @include medium-screen {
+                    font-size: 20px;
+                    margin-bottom: 20px;
+                }
+                @include small-screen {
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
                 & > span {
                     font-weight: bold;
                     margin-left: 20px;
@@ -83,6 +139,15 @@
                 color: $default-90;
                 margin-bottom: 30px;
                 text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                @include medium-screen {
+                    font-size: 16px;
+                }
+                @include small-screen {
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                    padding: 5px;
+                }
+
             }
             & .ElementHeaderSlide__link-to-movie {
                 display: flex;
@@ -97,6 +162,14 @@
                     background-color: transparent;
                     border: 1px solid $default-90;
                     color: $default-90;
+                    @include medium-screen {
+                        font-size: 18px;
+                        padding: 10px 15px;
+                    }
+                    @include small-screen {
+                        font-size: 16px;
+                        padding: 10px 10px;
+                    }
                     &:hover {
                         border-color: #da2210;
                         cursor: pointer;
@@ -107,22 +180,52 @@
         }
         & .ElementHeaderSlide__right-side {
             display: flex;
-            //top: 20%;
             flex-direction: column;
             position: relative;
             flex-wrap: wrap;
-            //flex: 1 1 35%;
             padding: 50px 0px 50px 50px;
+            @include medium-screen {
+                flex: 1 1 30%;
+                padding: 25px 0px 25px 25px;
+            }
+            @include small-screen {
+                flex: 1 1 30%;
+            }
+            @include x-small-screen {
+                flex: 1 1 100%;
+                padding: 0;
+                width: 100%;
+            }
             & .ElementHeaderSlide__poster {
                 display: flex;
+                position: relative;
                 justify-content: center;
                 align-items: center;
                 padding: 20px;
+                @include x-small-screen {
+                    width: 100%;
+                    padding: 0;
+                }
                 & .ElementHeaderSlide__poster-image {
                     display: block;
+                    position: relative;
                     max-width: 70%;
                     border-radius: 10px;
                     box-shadow: 0 14px 28px rgba(0,0,0,0.85), 0 10px 10px rgba(0,0,0,0.55);
+                    @include large-screen {
+                        max-width: 60%;
+                    }
+                    @include medium-screen {
+                        max-width: 80%;
+                    }
+                    @include small-screen {
+                        max-width: 80%;
+                    }
+                    @include x-small-screen {
+                        max-width: 300px;
+                        padding: 0;
+                    }
+
                 }
             }
 
@@ -142,4 +245,8 @@
     letter-spacing: 5px;
     z-index: 10;
     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.slick-active {
+    z-index: 1000;
 }
