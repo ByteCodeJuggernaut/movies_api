@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { default as isoFetch } from 'isomorphic-fetch';
-import { URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, BACKDROP_SIZE_LARGE, API_KEY, URL_DETAIL, BACKDROP_SIZE_ORIGINAL, URL_CAST, URL_VIDEO, CAST_MAX_NUM, URL_YOUTUBE, TRAILER_MAX_NUM } from '../../actions/const';
+import { URL_LIST, LANGUAGE, URL_SIMILAR, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, BACKDROP_SIZE_LARGE, API_KEY, URL_DETAIL, BACKDROP_SIZE_ORIGINAL, URL_CAST, URL_VIDEO, CAST_MAX_NUM, URL_YOUTUBE, TRAILER_MAX_NUM } from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,6 @@ import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../../actions/
 import CastList from '../../components/complex/CastList';
 import Modal from 'react-modal';
 import './Page_MovieInfo.scss';
-
 
 
 const fetchApiData = ({actionType, fieldName, url}) =>
@@ -59,11 +58,13 @@ class PageMovieInfo extends React.PureComponent {
         let url = URL_DETAIL + this.state.movieID + API_KEY + LANGUAGE;
         let trailerList = URL_DETAIL + this.state.movieID + URL_VIDEO + API_KEY + LANGUAGE;
         let castList = URL_DETAIL + this.state.movieID + URL_CAST + API_KEY + LANGUAGE;
+        let similarFilms = URL_DETAIL + this.state.movieID + URL_SIMILAR + API_KEY + LANGUAGE;
 
         Promise.all([
                    fetchApiData({actionType: 'SET_RECENT_MOVIES', fieldName: 'movieDetail', url: url}),
                    fetchApiData({actionType: 'SET_RECENT_MOVIES_TRAILERS', fieldName: 'recentTrailers', url: trailerList}),
-                   fetchApiData({actionType: 'SET_RECENT_MOVIES_CAST', fieldName: 'recentCastList', url: castList})
+                   fetchApiData({actionType: 'SET_RECENT_MOVIES_CAST', fieldName: 'recentCastList', url: castList}),
+                   fetchApiData({actionType: 'SET_RECENT_MOVIES_SIMILAR', fieldName: 'similarMoviesList', url: similarFilms}),
                ])
                .then(results => {
                    console.warn('results received:', results);
@@ -387,20 +388,33 @@ class PageMovieInfo extends React.PureComponent {
         this.setState({modalIsOpen: true});
     };
 
-
     closeModal = () => {
         this.setState({modalIsOpen: false});
     };
+
     render() {
         // let movieDetail = JSON.parse(JSON.stringify(this.props.movieDetail.recentMovies));
         // let movieCast = JSON.parse(JSON.stringify(this.props.movieDetail.recentCastList));
         // let movieTrailer = JSON.parse(JSON.stringify(this.props.movieDetail.recentTrailers));
+        const customStyles = {
+            content: {
+                height: '80%',
+                width: '80%',
+                padding: 'none',
+                margin: 'auto',
+                display: 'flex',
+                backgroundColor: 'rgba(0,0,0, 0.8)',
+            },
+            overlay: {
+                backgroundColor: 'rgba(0,0,0, 0.7)',
+            }
+        };
         const {movieDetail} = this.props;
         let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + this.props.movieDetail.recentMovies.backdrop_path;
         let styleSlide = {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.9) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
-        console.log("this.props", this.props.movieDetail.recentTrailers);
+        console.log("this.props", this.props.movieDetail.similarMoviesList);
         // console.log("movie detail", movieDetail);
 
         if ( this.state.requestFailed ) return <p>Failed</p>
@@ -462,22 +476,35 @@ class PageMovieInfo extends React.PureComponent {
                                 <h4>Про что фильм: </h4>
                                 { this.props.movieDetail.recentMovies.overview }
                             </div>
-
+                            <div className = { this.compMainClass + "__block-trailer" }>
+                                <a onClick = { this.openModal }
+                                        className = { this.compMainClass + "__trailer-button" }>
+                                    <i></i>Посмотреть трейлер
+                                </a>
+                                <Modal
+                                    isOpen={this.state.modalIsOpen}
+                                    onRequestClose={this.closeModal}
+                                    style = { customStyles }
+                                    contentLabel="Example Modal">
+                                    <iframe className = { this.compMainClass + "__trailer" }
+                                            width = { '100%' }
+                                            height = { '100%' }
+                                            src={URL_YOUTUBE + this.props.movieDetail.recentTrailers.slice(0,TRAILER_MAX_NUM)[0].key}
+                                            allowFullScreen/>
+                                </Modal>
+                            </div>
                         </div>
                     </Row>
                     <div className = { this.compMainClass + "__block-actors" }>
                         <h3>В главных ролях:</h3>
                         <CastList castsValue = { this.props.movieDetail.recentCastList.slice(0, CAST_MAX_NUM) }/>
                     </div>
-                    <div className = { this.compMainClass + "__block-trailer" }>
-                        <button onClick={this.openModal}>click</button>
-                        <Modal
-                            isOpen={this.state.modalIsOpen}
-                            onRequestClose={this.closeModal}
-                            contentLabel="Example Modal">
-                            <iframe src={URL_YOUTUBE + this.props.movieDetail.recentTrailers.slice(0,TRAILER_MAX_NUM)[0].key} allowFullScreen/>
-                        </Modal>
+
+                    <div className = { this.compMainClass + "__block-similar" }>
+                        <h3>Список похиожих фильмов:</h3>
+
                     </div>
+
                 </div>
             </div>
         )

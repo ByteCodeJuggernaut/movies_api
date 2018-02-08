@@ -23,6 +23,7 @@ export const ADD_MOVIE_FAVORITES = 'ADD_MOVIE_FAVORITES';
 export const DELETE_MOVIE_FAVORITES = 'DELETE_MOVIE_FAVORITES';
 export const DELETE_MOVIE_WATCHED = 'DELETE_MOVIE_WATCHED';
 export const ADD_MOVIE_WATCHED = 'ADD_MOVIE_WATCHED';
+export const SET_RECENT_MOVIES_SIMILAR = 'SET_RECENT_MOVIES_SIMILAR';
 
 
 
@@ -268,6 +269,7 @@ const defaultRecentMovie = {
     recentMovies:{},
     recentCastList: {},
     recentTrailers: {},
+    similarMoviesList: {},
     error:{}
 };
 
@@ -345,6 +347,8 @@ const recentMoviesList = ( state = defaultRecentMovie, action ) => {
             return {...state, isFetching:false, error:null, recentCastList: action.recentCastList.cast};
         case SET_RECENT_MOVIES_TRAILERS:
             return {...state, isFetching:false, error:null, recentTrailers: action.recentTrailers.results};
+        case SET_RECENT_MOVIES_SIMILAR:
+            return {...state, isFetching:false, error:null, similarMoviesList: action.similarMoviesList.results};
         default:
             return state;
     }
