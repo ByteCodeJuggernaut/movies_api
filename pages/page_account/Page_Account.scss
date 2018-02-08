@@ -6,11 +6,11 @@
     width: 100%;
     color: $default-90;
     background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0.7) 100%), url("/images/movieflix-background.jpg") no-repeat center center fixed;
+    background-size: cover;
     & > .PageAccount__container {
         display: block;
         position: relative;
         padding-top: 200px;
-        //background-color: black;
 
         & > .PageAccount__account {
             color: #da2020;
@@ -19,8 +19,12 @@
             padding: 20px 0;
             margin-bottom: 15px;
         }
-        & > .PageAccount__container-watched {
-
+        & > .PageAccount__container-watched, .PageAccount__container-watchLater  {
+            & > h2 {
+                @include x-small-screen {
+                    font-size: 38px;
+                }
+            }
         }
     }
     & .PageAccount__film {
@@ -44,6 +48,9 @@
                 width: 150px;
                 height: auto;
                 border-radius: 8px;
+                @include x-small-screen {
+                    width: 200px;
+                }
             }
         }
         & > .PageAccount__film_information {
@@ -56,9 +63,15 @@
             & > .PageAccount__film_information-title {
                 font-size: 20px;
                 margin-bottom: 15px;
+                @include x-small-screen {
+                    font-size: 26px;
+                }
             }
             & > .PageAccount__film_information-description {
                 font-size: 16px;
+                @include x-small-screen {
+                    font-size: 18px;
+                }
             }
         }
     }

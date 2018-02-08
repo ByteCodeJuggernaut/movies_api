@@ -5,6 +5,7 @@ export default new Config().extend('webpack.base.config.js').merge({
   output: {
     filename: '[name].bundle.[hash].min.js'
   },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

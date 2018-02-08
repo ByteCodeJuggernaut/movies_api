@@ -17,7 +17,8 @@
         max-width: 235px;
         padding: 10px;
     }
-    @include small-screen {
+    @include x-small-screen {
+        min-width: 255px;
 
     }
 
@@ -52,12 +53,18 @@
             font-size: 16px;
             text-align: center;
         }
+        @include x-small-screen {
+            font-size: 20px;
+        }
     }
     & > .SimilarFilm__year {
         display: flex;
         justify-content: center;
         color: #f9f9f9;
         font-size: 12px;
+        @include x-small-screen {
+            font-size: 18px;
+        }
     }
     & > .SimilarFilm__country {
         display: flex;

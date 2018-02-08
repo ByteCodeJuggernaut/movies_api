@@ -46,7 +46,7 @@
                     width: 150px;
                 }
                 @include x-small-screen {
-                    width: 100px;
+                    width: 150px;
                 }
                 &:hover {
                     cursor: pointer;
@@ -80,6 +80,9 @@
                     margin-right: 5px;
                     @include medium-screen {
                         padding: 5px 8px;
+                    }
+                    @include x-small-screen {
+                        font-size: 18px;
                     }
                     &:last-child {
                         margin-right: 5px;

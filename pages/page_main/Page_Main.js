@@ -35,7 +35,7 @@ let g_settings = {
     responsive: [
         {
             breakpoint: 1024,
-            settings: { slidesToShow: 4 }
+            settings: { slidesToShow: 3 }
         },
         {
             breakpoint: 1378,

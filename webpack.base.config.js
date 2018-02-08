@@ -7,12 +7,14 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ExtractSass = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
   disable: process.env.NODE_ENV === "development"
-})
+});
+
 
 export default new Config().merge({
     entry: './index.js',
     output: {
-        path: __dirname + '/public',
+        path: __dirname + 'public',
+        publicPath: '/'
     },
     module: {
         rules:[
@@ -39,12 +41,34 @@ export default new Config().merge({
                 fallback: "style-loader"
               })
             },
+            {
+                test: /\.(png|jpg)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path].[name].[ext]',
+                        publicPath: 'images/',
+                        useRelativePath: 'false'
+                    }
+                }]
+
+            },
+        ],
+        loaders: [
+
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: "file-loader?name=img/img-[hash:6].[ext]"
+            }
+
         ]
-  },
+    },
+
   plugins: [
     new ExtractTextPlugin("[name].bundle.[hash].css"),
     new HtmlWebpackPlugin({
       template: './index.html',
       inject: "body"
-    })]
+    })],
+
 });

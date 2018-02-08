@@ -14,7 +14,7 @@ const compMainClass = "ElementHeaderSlide";
 let g_settings = {
     dots: false,
     fade: true,
-    autoplay: false,
+    autoplay: true,
     centerPadding: '0px',
     arrows: false,
     draggable: true,

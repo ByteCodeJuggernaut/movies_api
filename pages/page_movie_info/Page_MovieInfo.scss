@@ -18,6 +18,11 @@
             padding: 40px 0;
             justify-content: center;
             align-items: center;
+            @include x-small-screen {
+                height: 100%;
+                flex-direction: column;
+                margin-top: 180px;
+            }
             & > .PageMovieInfo__left-column {
                 display: flex;
                 flex: 1 1 20%;
@@ -29,13 +34,26 @@
                 @include medium-screen {
                     flex: 1 1 30%;
                 }
+                @include x-small-screen {
+                    flex: 1 1 100%;
+                    padding: 0;
+                    width: 100%;
+                }
+
                 & > .PageMovieInfo__left-column_poster {
                     display: block;
+                    position: relative;
                     max-width: 400px;
                     border-radius: 10px;
                     box-shadow: 0 14px 28px rgba(0,0,0,0.85), 0 10px 10px rgba(0,0,0,0.55);
                     @include medium-screen {
                         width: 100%;
+                    }
+                    @include x-small-screen {
+                        width: 60%;
+                        max-width: 100%;
+                        height: auto;
+                        margin: auto;
                     }
                 }
             }
@@ -51,6 +69,12 @@
                 @include small-screen {
                     padding: 10px 20px;
                 }
+                @include x-small-screen {
+                    flex: 1 1 100%;
+                    padding: 0 100px;
+                    margin-top: 50px;
+                    width: 100%;
+                }
                 & > .PageMovieInfo__title {
                     font-size: $h0;
                     font-weight: bold;
@@ -64,6 +88,9 @@
                     }
                     @include small-screen {
                         font-size: 24px;
+                    }
+                    @include x-small-screen {
+                        font-size: 48px;
                     }
                 }
                 & > .PageMovieInfo__quote {
@@ -80,16 +107,23 @@
                         font-size: 18px;
                         margin-bottom: 5px;
                     }
+                    @include x-small-screen {
+                        font-size: 30px;
+                        margin-bottom: 20px;
+                    }
                 }
                 & > .PageMovieInfo__inline-block {
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
                     align-items: stretch;
-                    justify-content: flex-start;
+                    justify-content: space-between;
                     margin-bottom: 20px;
                     @include medium-screen {
                         margin-bottom: 10px;
+                    }
+                    @include x-small-screen {
+                        margin-bottom: 20px;
                     }
                     & > .PageMovieInfo__data-release {
                         display: flex;
@@ -106,6 +140,9 @@
                         }
                         @include small-screen {
                             padding: 0;
+                        }
+                        @include x-small-screen {
+
                         }
                     }
                     & > .PageMovieInfo__votes {
@@ -152,6 +189,10 @@
                             width: 30px;
                             height: 30px;
                         }
+                        @include x-small-screen {
+                            width: 80px;
+                            height: 80px;
+                        }
                         & > img {
                             display: block;
                             width: 100%;
@@ -160,6 +201,9 @@
                     & .PageMovieInfo__inline-block_text {
                         font-size: $h1;
                         font-weight: bold;
+                        @include x-small-screen {
+                            font-size: 55px;
+                        }
                     }
                 }
                 & > .PageMovieInfo__description {
@@ -177,6 +221,11 @@
                         font-size: 16px;
                         line-height: 1.2;
                     }
+                    @include x-small-screen {
+                        font-size: 28px;
+                        line-height: 1.4;
+                        padding: 20px 0;
+                    }
                 }
                 & > .PageMovieInfo__block-button {
                     display: flex;
@@ -185,7 +234,13 @@
                     align-items: stretch;
                     justify-content: flex-start;
                     margin: 15px 0;
+                    @include x-small-screen {
+                        justify-content: space-between;
+                    }
                     & > .PageMovieInfo__button {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
                         padding: 8px 10px;
                         width: 175px;
                         text-align: center;
@@ -193,17 +248,19 @@
                         border-radius: 15px;
                         font-size: $default - 2;
                         color: $dark-90;
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: wrap;
-                        align-items: center;
                         background-color: rgba(178, 178, 178, 0.5);
                         box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
                         border: 1px solid #000000;
-                        justify-content: flex-start;
+                        justify-content: center;
                         transition: all .4s ease;
                         @include small-screen {
                             width: auto;
+                        }
+                        @include x-small-screen {
+                            width: 30%;
+                            margin-right: 0;
+                            font-size: 20px;
+                            text-align: center;
                         }
                         &:hover {
                             background-color: rgba(240, 240, 240, 0.7);
@@ -226,6 +283,10 @@
                             margin-right: 10px;
                             background: url("/images/toFavorites.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
                     & .later {
@@ -244,6 +305,10 @@
                             margin-right: 10px;
                             background: url("/images/later.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
                     & .watched {
@@ -262,6 +327,10 @@
                             margin-right: 10px;
                             background: url("/images/watched.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
                     & .watched-active {
@@ -276,6 +345,10 @@
                             margin-right: 10px;
                             background: url("/images/watched_active.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
                     & .later-active {
@@ -290,6 +363,10 @@
                             margin-right: 10px;
                             background: url("/images/later_active.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
                     & .favorites-active {
@@ -304,12 +381,19 @@
                             margin-right: 10px;
                             background: url("/images/toFavorites_active.png") no-repeat center center;
                             background-size: cover;
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
+                            }
                         }
                     }
 
 
                 }
                 & > .PageMovieInfo__block-trailer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     & > .PageMovieInfo__trailer-button {
                         display: flex;
                         flex-direction: row;
@@ -321,6 +405,11 @@
                         border-radius: 15px;
                         @include medium-screen {
                             width: 230px;
+                        }
+                        @include x-small-screen {
+                            width: 50%;
+                            padding: 15px 20px;
+                            font-size: 26px;
                         }
                         &:hover {
                             cursor: pointer;
@@ -337,6 +426,10 @@
                             @include medium-screen {
                                 width: 30px;
                                 height: 30px;
+                            }
+                            @include x-small-screen {
+                                width: 50px;
+                                height: 50px;
                             }
                         }
                     }
@@ -355,11 +448,17 @@
             @include small-screen {
                 padding: 15px;
             }
+            @include x-small-screen {
+                padding: 25px;
+            }
             & > h3 {
                 font-size: 24px;
                 color: rgba(255, 255, 255, 0.9);
                 text-shadow: 0 3px 3px rgba(0, 0, 0, 0.35), 0 2px 2px rgba(0, 0, 0, 0.15);
                 margin-bottom: 25px;
+                @include x-small-screen {
+                    font-size: 38px;
+                }
             }
             & > .PageMovieInfo__actors {
                 display: flex;
@@ -384,6 +483,9 @@
                 color: rgba(255, 255, 255, 0.9);
                 text-shadow: 0 3px 3px rgba(0, 0, 0, 0.35), 0 2px 2px rgba(0, 0, 0, 0.15);
                 margin-bottom: 10px;
+                @include x-small-screen {
+                    font-size: 38px;
+                }
             }
             & > .PageMovieInfo__similar-films {
                 display: flex;
