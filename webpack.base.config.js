@@ -13,7 +13,7 @@ const ExtractSass = new ExtractTextPlugin({
 export default new Config().merge({
     entry: './index.js',
     output: {
-        path: __dirname + 'public',
+        path: __dirname + '/public',
         publicPath: '/'
     },
     module: {
@@ -41,27 +41,19 @@ export default new Config().merge({
                 fallback: "style-loader"
               })
             },
-            {
-                test: /\.(png|jpg)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[path].[name].[ext]',
-                        publicPath: 'images/',
-                        useRelativePath: 'false'
-                    }
-                }]
-
-            },
+            // {
+            //     test: /\.(png|jpg)$/,
+            //     use: [{
+            //         loader: 'file-loader',
+            //         options: {
+            //             name: '[path].[name].[ext]',
+            //             publicPath: 'images/',
+            //             useRelativePath: 'false'
+            //         }
+            //     }]
+            //
+            // },
         ],
-        loaders: [
-
-            {
-                test: /\.(png|jpg|gif)$/,
-                loader: "file-loader?name=img/img-[hash:6].[ext]"
-            }
-
-        ]
     },
 
   plugins: [
