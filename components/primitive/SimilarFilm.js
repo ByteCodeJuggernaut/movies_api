@@ -18,14 +18,12 @@ import { push }                                         from "react-router-redux
 
 class SimilarFilm extends React.PureComponent {
     static propTypes = {
-        castValue:      PropTypes.object,
+        similarValue:      PropTypes.object,
     };
 
     static defaultProps = {
-        castValue: {
-            profile_path: '',
-            character: '',
-            name: '',
+        similarValue: {
+
         }
     };
 
@@ -39,21 +37,27 @@ class SimilarFilm extends React.PureComponent {
     compMainClass = "SimilarFilm";
 
     render() {
-
         return(
-            <div className = { this.compMainClass }>
-                <img src={ URL_IMG + IMG_SIZE_MEDIUM + this.state.castValue.profile_path } alt="" className = { this.compMainClass + "__poster"}/>
-                <div className = { this.compMainClass + "__"}>
+            <Link to={ '/movie/'+ this.state.similarValue.id } className = { this.compMainClass }>
+                <img src={ URL_IMG + IMG_SIZE_MEDIUM + this.state.similarValue.poster_path }
+                     alt=""
+                     className = { this.compMainClass + "__poster"}/>
+                <div className = { this.compMainClass + "__title"}>
                     <p>
-                        { this.state.castValue.name }
+                        { this.state.similarValue.title }
                     </p>
                 </div>
-                <div className = { this.compMainClass + "__actor"}>
+                <div className = { this.compMainClass + "__year"}>
                     <p>
-                        { this.state.castValue.name }
+                        { this.state.similarValue.release_date.substring(0,4) }
                     </p>
                 </div>
-            </div>
+                <div className = { this.compMainClass + "__country"}>
+                    <p>
+                        { this.state.similarValue.vote_average }
+                    </p>
+                </div>
+            </Link>
         )
     }
 }

@@ -99,6 +99,9 @@
                 width: 100%;
             }
         }
+        & .searchResult-text {
+            color: #ebebeb;
+        }
     }
     & > .BlockHeader__account-box {
         display: flex;

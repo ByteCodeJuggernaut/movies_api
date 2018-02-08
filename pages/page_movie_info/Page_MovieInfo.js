@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../../actions/actions';
 
 import CastList from '../../components/complex/CastList';
+import SimilarFilm from '../../components/primitive/SimilarFilm';
 import Modal from 'react-modal';
 import './Page_MovieInfo.scss';
 
@@ -35,9 +36,9 @@ class PageMovieInfo extends React.PureComponent {
     static  defaultProps = {
         addToLater:     false,
         addToFavorites: false,
-        modalIsOpen: false,
+        modalIsOpen:    false,
         addToWatched:   false,
-        isFetching:   true,
+        // isFetching:     true,
     };
 
     constructor( props ) {
@@ -55,10 +56,10 @@ class PageMovieInfo extends React.PureComponent {
     compMainClass = "PageMovieInfo";
 
     componentDidMount() {
-        let url = URL_DETAIL + this.state.movieID + API_KEY + LANGUAGE;
-        let trailerList = URL_DETAIL + this.state.movieID + URL_VIDEO + API_KEY + LANGUAGE;
-        let castList = URL_DETAIL + this.state.movieID + URL_CAST + API_KEY + LANGUAGE;
-        let similarFilms = URL_DETAIL + this.state.movieID + URL_SIMILAR + API_KEY + LANGUAGE;
+        let url = URL_DETAIL + this.props.match.params.id + API_KEY + LANGUAGE;
+        let trailerList = URL_DETAIL + this.props.match.params.id + URL_VIDEO + API_KEY + LANGUAGE;
+        let castList = URL_DETAIL + this.props.match.params.id + URL_CAST + API_KEY + LANGUAGE;
+        let similarFilms = URL_DETAIL + this.props.match.params.id + URL_SIMILAR + API_KEY + LANGUAGE;
 
         Promise.all([
                    fetchApiData({actionType: 'SET_RECENT_MOVIES', fieldName: 'movieDetail', url: url}),
@@ -67,7 +68,6 @@ class PageMovieInfo extends React.PureComponent {
                    fetchApiData({actionType: 'SET_RECENT_MOVIES_SIMILAR', fieldName: 'similarMoviesList', url: similarFilms}),
                ])
                .then(results => {
-                   console.warn('results received:', results);
                    results.map(result => ({
                        type: result.actionType,
                        [result.fieldName]: result.data
@@ -77,83 +77,40 @@ class PageMovieInfo extends React.PureComponent {
                    })
                });
 
-        // isoFetch( url )
-        //     .then( response => {
-        //         if ( !response.ok ) {
-        //             throw Error( "Ошибка запроса" )
-        //         }
-        //         return response;
-        //     } )
-        //     .then( data => data.json() )
-        //     .then( data => {
-        //         this.setState( {
-        //             getMovieID: data,
-        //         }, () => {
-        //             // console.log( "getMovieID", this.state.getMovieID );
-        //             this.props.dispatch({
-        //                 type: "SET_RECENT_MOVIES",
-        //                 movieDetail: this.state.getMovieID,
-        //             })
-        //         } );
-        //     }, () => {
-        //         this.setState( {
-        //             requestFailed: true,
-        //         } )
-        //     } );
-        // isoFetch( trailerList )
-        //     .then( response => {
-        //         if ( !response.ok ) {
-        //             throw Error( "Ошибка запроса" )
-        //         }
-        //         return response;
-        //     } )
-        //     .then( data => data.json() )
-        //     .then( data => {
-        //         this.setState( {
-        //             trailers: data,
-        //         }, () => {
-        //             // console.log( "getMovieID", this.state.getMovieID );
-        //             this.props.dispatch({
-        //                 type: "SET_RECENT_MOVIES_TRAILERS",
-        //                 recentTrailers: this.state.trailers.results,
-        //             })
-        //         } );
-        //     }, () => {
-        //         this.setState( {
-        //             requestFailed: true,
-        //         } )
-        //     } )
-        // isoFetch( castList )
-        //     .then( response => {
-        //         if ( !response.ok ) {
-        //             throw Error( "Ошибка запроса" )
-        //         }
-        //         return response;
-        //     } )
-        //     .then( data => data.json() )
-        //     .then( data => {
-        //         this.setState( {
-        //             casts: data,
-        //         }, () => {
-        //             // console.log( "getMovieID", this.state.getMovieID );
-        //             this.props.dispatch({
-        //                 type: "SET_RECENT_MOVIES_CAST",
-        //                 recentCastList: this.state.casts.cast.slice(0, CAST_MAX_NUM),
-        //             })
-        //         } );
-        //     }, () => {
-        //         this.setState( {
-        //             requestFailed: true,
-        //         } )
-        //     } )
-
     };
 
     componentWillReceiveProps(nextProps) {
-        this.prepareProps( nextProps );
-        const {dispatch} = this.props.match;
-        if(nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
-            dispatch(fetchMovieDetail(nextProps.match.params.id));
+
+        this.setState({
+            movieID: nextProps.match.params.id,
+        }, () => {
+
+        });
+
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.movieID !== this.state.movieID) {
+            let url = URL_DETAIL + this.state.movieID + API_KEY + LANGUAGE;
+            let trailerList = URL_DETAIL + this.state.movieID + URL_VIDEO + API_KEY + LANGUAGE;
+            let castList = URL_DETAIL + this.state.movieID + URL_CAST + API_KEY + LANGUAGE;
+            let similarFilms = URL_DETAIL + this.state.movieID + URL_SIMILAR + API_KEY + LANGUAGE;
+
+            Promise.all([
+                       fetchApiData({actionType: 'SET_RECENT_MOVIES', fieldName: 'movieDetail', url: url}),
+                       fetchApiData({actionType: 'SET_RECENT_MOVIES_TRAILERS', fieldName: 'recentTrailers', url: trailerList}),
+                       fetchApiData({actionType: 'SET_RECENT_MOVIES_CAST', fieldName: 'recentCastList', url: castList}),
+                       fetchApiData({actionType: 'SET_RECENT_MOVIES_SIMILAR', fieldName: 'similarMoviesList', url: similarFilms}),
+                   ])
+                   .then(results => {
+                       results.map(result => ({
+                           type: result.actionType,
+                           [result.fieldName]: result.data
+                       })).forEach(this.props.dispatch);
+                       this.setState({
+                           isFetching: false,
+                       })
+                   });
         }
     }
 
@@ -166,7 +123,7 @@ class PageMovieInfo extends React.PureComponent {
             ...PageMovieInfo.defaultProps,
         };
 
-        let value = null;
+        let movieID = null;
         if ( this.isExists( props ) ) {
             newState = {
                 ...newState,
@@ -174,13 +131,13 @@ class PageMovieInfo extends React.PureComponent {
             };
         }
 
-        if ( this.isExists( this.state.value ) ) { value = this.state.value; }
+        if ( this.isExists( this.state.movieID ) ) { movieID = this.state.movieID; }
 
-        value = ( value !== null ) ? value : '';
+        movieID = ( movieID !== null ) ? movieID : '';
 
         this.setState( {
             ...newState,
-            value: value,
+            movieID: movieID,
         }, () => {
 
         } );
@@ -209,16 +166,15 @@ class PageMovieInfo extends React.PureComponent {
             }, () => {
                 this.props.dispatch({
                     type: "DELETE_MOVIE_LATER",
-                    addMovieLater: this.state.listLater,
+                    addMovieLater: newListLater,
                 })
             })
+
         } else {
-            console.log('false');
             let movie = {
                 movieValue: currentMovie,
                 added: true,
             };
-
             let newList = [...this.state.listLater];
             for( let i = 0; i < newList.length; i++) {
                 if( newList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
@@ -228,14 +184,13 @@ class PageMovieInfo extends React.PureComponent {
                     break;
                 }
             }
-
             this.setState({
                 listLater: [...newList],
                 addToLater: true,
             }, () => {
                 this.props.dispatch({
                     type: "ADD_MOVIE_LATER",
-                    addMovieLater: this.state.listLater,
+                    addMovieLater: newList,
                 })
             });
         }
@@ -281,6 +236,7 @@ class PageMovieInfo extends React.PureComponent {
             this.setState({
                 listFavorites: [...newList],
                 addToLater: true,
+                // isFetching: false,
             }, () => {
                 this.props.dispatch({
                     type: "ADD_MOVIE_FAVORITES",
@@ -403,6 +359,9 @@ class PageMovieInfo extends React.PureComponent {
                 padding: 'none',
                 margin: 'auto',
                 display: 'flex',
+                color: '#da2210',
+                textAlign: 'center',
+                top: '55px',
                 backgroundColor: 'rgba(0,0,0, 0.8)',
             },
             overlay: {
@@ -414,11 +373,19 @@ class PageMovieInfo extends React.PureComponent {
         let styleSlide = {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.9) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
-        console.log("this.props", this.props.movieDetail.similarMoviesList);
+        console.warn("this.state.isFetching", this.state.isFetching);
         // console.log("movie detail", movieDetail);
 
         if ( this.state.requestFailed ) return <p>Failed</p>
-        if ( this.state.isFetching ) return <p>Loading</p>
+        if ( this.isExists(this.state.isFetching) !== true ) return <div className = { this.compMainClass + "__loading" }>
+            <h3>Loading</h3>
+            <div class="slider">
+                <div class="line"></div>
+                <div class="break dot1"></div>
+                <div class="break dot2"></div>
+                <div class="break dot3"></div>
+            </div>
+        </div>
         return (
             <div className = { this.compMainClass + "__wrapper"} style={ styleSlide }>
                 <div className = { this.compMainClass + "__container container" }>
@@ -486,12 +453,21 @@ class PageMovieInfo extends React.PureComponent {
                                     onRequestClose={this.closeModal}
                                     style = { customStyles }
                                     contentLabel="Example Modal">
-                                    <iframe className = { this.compMainClass + "__trailer" }
-                                            width = { '100%' }
-                                            height = { '100%' }
-                                            src={URL_YOUTUBE + this.props.movieDetail.recentTrailers.slice(0,TRAILER_MAX_NUM)[0].key}
-                                            allowFullScreen/>
+                                    {
+                                        (this.isNotEmpty(this.props.movieDetail.recentTrailers)) ?
+
+                                                <iframe className = { this.compMainClass + "__trailer" }
+                                                        width = { '100%' }
+                                                        height = { '100%' }
+                                                        src={ URL_YOUTUBE + this.props.movieDetail.recentTrailers.slice(0,TRAILER_MAX_NUM)[0].key }
+                                                        allowFullScreen/>
+
+                                            : <div className = { this.compMainClass + "__not-found" }>
+                                                Извините данный трейлер отсутствует в базе :(
+                                            </div>
+                                    }
                                 </Modal>
+
                             </div>
                         </div>
                     </Row>
@@ -499,11 +475,23 @@ class PageMovieInfo extends React.PureComponent {
                         <h3>В главных ролях:</h3>
                         <CastList castsValue = { this.props.movieDetail.recentCastList.slice(0, CAST_MAX_NUM) }/>
                     </div>
+                    {
+                        this.isNotEmpty(this.props.movieDetail.similarMoviesList) ?
+                            <div className = { this.compMainClass + "__block-similar" }>
+                                <h3>Список похожих фильмов:</h3>
+                                <div className = { this.compMainClass + "__similar-films" }>
+                                    {
+                                        this.props.movieDetail.similarMoviesList.slice(0, 10).map( ( item, index ) => {
+                                            return(
+                                                <SimilarFilm similarValue = { item } key = { index }/>
+                                            )
+                                        } )
+                                    }
+                                </div>
+                            </div>
+                            : null
+                    }
 
-                    <div className = { this.compMainClass + "__block-similar" }>
-                        <h3>Список похиожих фильмов:</h3>
-
-                    </div>
 
                 </div>
             </div>
