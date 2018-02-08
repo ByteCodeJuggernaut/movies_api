@@ -44,7 +44,7 @@ class FilmsRenderer extends React.PureComponent {
     }
     compMainClass = "PageMain";
     render() {
-        console.warn('rendering slider!!', this.props.filmList);
+        // console.warn('rendering slider!!', this.props.filmList);
         let filterList = this.props.filmList.filter((item) => {
             if(item.poster_path !== null && item.poster_path !== undefined) {
                 return item;
@@ -83,8 +83,6 @@ class FilmsRenderer extends React.PureComponent {
     }
 }
 
-
-
 class PageMain extends React.Component {
 
     static propTypes = {
@@ -114,7 +112,7 @@ class PageMain extends React.Component {
 
         // this.props.getMovies();
 
-        this.props.dispatch(getMovies());
+        // this.props.dispatch(getMovies());
 
         let urlPopular = URL_POPULAR + API_KEY + LANGUAGE + REGION;
         let urlUpcoming = URL_LIST_UPCOMING + API_KEY + LANGUAGE + REGION;
@@ -133,6 +131,40 @@ class PageMain extends React.Component {
                 })).forEach(this.props.dispatch);
             });
     };
+
+    componentWillMount() {
+        this.prepareProps( this.state );
+    }
+    componentWillReceiveProps( newProps ) {
+        this.prepareProps( newProps );
+    }
+
+    prepareProps = ( props ) => {
+        let newState = {
+            ...PageMain.defaultProps,
+        };
+
+        let value = null;
+        if ( this.isExists( props ) ) {
+            newState = {
+                ...newState,
+                ...props,
+            };
+        }
+
+        if ( this.isExists( this.state.value ) ) { value = this.state.value; }
+
+        value = ( value !== null ) ? value : '';
+
+        this.setState( {
+            ...newState,
+            value: value,
+        }, () => {
+            // console.log( '%c%s', 'color: green', 'SubmiteBlock: prepareProps: state: ',
+            // this.state );
+        } );
+    };
+
 
     isExists = ( value ) => (value !== undefined && value !== null);
 

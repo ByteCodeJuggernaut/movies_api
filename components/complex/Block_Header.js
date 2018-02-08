@@ -153,10 +153,10 @@ class BlockHeader extends React.PureComponent {
 
     compMainClass = "BlockHeader";
 
-    testActionClick = () => {
-      // console.log("test action click <--");
-        this.props.dispatch()
-    };
+    // testActionClick = () => {
+    //   // console.log("test action click <--");
+    //     this.props.dispatch()
+    // };
 
     handleHoverImg = (e) => {
         e.currentTarget.setAttribute('src', '/images/logo-api-white.png');

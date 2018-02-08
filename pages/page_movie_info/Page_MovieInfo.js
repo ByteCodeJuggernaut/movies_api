@@ -1,14 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { default as isoFetch } from 'isomorphic-fetch';
-import { URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, BACKDROP_SIZE_LARGE, API_KEY, URL_DETAIL, BACKDROP_SIZE_ORIGINAL } from '../../actions/const';
+import { URL_LIST, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, BACKDROP_SIZE_LARGE, API_KEY, URL_DETAIL, BACKDROP_SIZE_ORIGINAL, URL_CAST, URL_VIDEO, CAST_MAX_NUM, URL_YOUTUBE, TRAILER_MAX_NUM } from '../../actions/const';
 import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 
 import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../../actions/actions';
 
+import CastList from '../../components/complex/CastList';
+import Modal from 'react-modal';
 import './Page_MovieInfo.scss';
 
+
+
+const fetchApiData = ({actionType, fieldName, url}) =>
+    isoFetch(url)
+        .then(response => {
+            if ( !response.ok ) {
+                throw new Error( "Ошибка запроса" )
+            }
+            return response;
+        })
+        .then(res => res.json())
+        .then(data => ({ actionType, fieldName, data}));
 
 class PageMovieInfo extends React.PureComponent {
 
@@ -22,7 +36,9 @@ class PageMovieInfo extends React.PureComponent {
     static  defaultProps = {
         addToLater:     false,
         addToFavorites: false,
+        modalIsOpen: false,
         addToWatched:   false,
+        isFetching:   true,
     };
 
     constructor( props ) {
@@ -41,38 +57,133 @@ class PageMovieInfo extends React.PureComponent {
 
     componentDidMount() {
         let url = URL_DETAIL + this.state.movieID + API_KEY + LANGUAGE;
-        isoFetch( url )
-            .then( response => {
-                if ( !response.ok ) {
-                    throw Error( "Ошибка запроса" )
-                }
-                return response;
-            } )
-            .then( data => data.json() )
-            .then( data => {
-                this.setState( {
-                    getMovieID: data,
-                }, () => {
-                    // console.log( "getMovieID", this.state.getMovieID );
-                    this.props.dispatch({
-                        type: "SET_RECENT_MOVIES",
-                        movieDetail: this.state.getMovieID,
-                    })
-                } );
-            }, () => {
-                this.setState( {
-                    requestFailed: true,
-                } )
-            } )
+        let trailerList = URL_DETAIL + this.state.movieID + URL_VIDEO + API_KEY + LANGUAGE;
+        let castList = URL_DETAIL + this.state.movieID + URL_CAST + API_KEY + LANGUAGE;
+
+        Promise.all([
+                   fetchApiData({actionType: 'SET_RECENT_MOVIES', fieldName: 'movieDetail', url: url}),
+                   fetchApiData({actionType: 'SET_RECENT_MOVIES_TRAILERS', fieldName: 'recentTrailers', url: trailerList}),
+                   fetchApiData({actionType: 'SET_RECENT_MOVIES_CAST', fieldName: 'recentCastList', url: castList})
+               ])
+               .then(results => {
+                   console.warn('results received:', results);
+                   results.map(result => ({
+                       type: result.actionType,
+                       [result.fieldName]: result.data
+                   })).forEach(this.props.dispatch);
+                   this.setState({
+                       isFetching: false,
+                   })
+               });
+
+        // isoFetch( url )
+        //     .then( response => {
+        //         if ( !response.ok ) {
+        //             throw Error( "Ошибка запроса" )
+        //         }
+        //         return response;
+        //     } )
+        //     .then( data => data.json() )
+        //     .then( data => {
+        //         this.setState( {
+        //             getMovieID: data,
+        //         }, () => {
+        //             // console.log( "getMovieID", this.state.getMovieID );
+        //             this.props.dispatch({
+        //                 type: "SET_RECENT_MOVIES",
+        //                 movieDetail: this.state.getMovieID,
+        //             })
+        //         } );
+        //     }, () => {
+        //         this.setState( {
+        //             requestFailed: true,
+        //         } )
+        //     } );
+        // isoFetch( trailerList )
+        //     .then( response => {
+        //         if ( !response.ok ) {
+        //             throw Error( "Ошибка запроса" )
+        //         }
+        //         return response;
+        //     } )
+        //     .then( data => data.json() )
+        //     .then( data => {
+        //         this.setState( {
+        //             trailers: data,
+        //         }, () => {
+        //             // console.log( "getMovieID", this.state.getMovieID );
+        //             this.props.dispatch({
+        //                 type: "SET_RECENT_MOVIES_TRAILERS",
+        //                 recentTrailers: this.state.trailers.results,
+        //             })
+        //         } );
+        //     }, () => {
+        //         this.setState( {
+        //             requestFailed: true,
+        //         } )
+        //     } )
+        // isoFetch( castList )
+        //     .then( response => {
+        //         if ( !response.ok ) {
+        //             throw Error( "Ошибка запроса" )
+        //         }
+        //         return response;
+        //     } )
+        //     .then( data => data.json() )
+        //     .then( data => {
+        //         this.setState( {
+        //             casts: data,
+        //         }, () => {
+        //             // console.log( "getMovieID", this.state.getMovieID );
+        //             this.props.dispatch({
+        //                 type: "SET_RECENT_MOVIES_CAST",
+        //                 recentCastList: this.state.casts.cast.slice(0, CAST_MAX_NUM),
+        //             })
+        //         } );
+        //     }, () => {
+        //         this.setState( {
+        //             requestFailed: true,
+        //         } )
+        //     } )
 
     };
 
     componentWillReceiveProps(nextProps) {
+        this.prepareProps( nextProps );
         const {dispatch} = this.props.match;
         if(nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
             dispatch(fetchMovieDetail(nextProps.match.params.id));
         }
     }
+
+    componentWillMount() {
+        this.prepareProps( this.state );
+    }
+
+    prepareProps = ( props ) => {
+        let newState = {
+            ...PageMovieInfo.defaultProps,
+        };
+
+        let value = null;
+        if ( this.isExists( props ) ) {
+            newState = {
+                ...newState,
+                ...props,
+            };
+        }
+
+        if ( this.isExists( this.state.value ) ) { value = this.state.value; }
+
+        value = ( value !== null ) ? value : '';
+
+        this.setState( {
+            ...newState,
+            value: value,
+        }, () => {
+
+        } );
+    };
 
     isExists = ( value ) => (value !== undefined && value !== null);
 
@@ -81,7 +192,7 @@ class PageMovieInfo extends React.PureComponent {
     setToListLate = (e) => {
         let addedMovie = e.currentTarget.dataset.added;
         let copyListLater = [...this.state.listLater];
-        console.log("list later", copyListLater);
+        // console.log("list later", copyListLater);
         let currentMovie = {...this.props.movieDetail.recentMovies};
 
         let idMovie = currentMovie.id;
@@ -109,7 +220,7 @@ class PageMovieInfo extends React.PureComponent {
 
             let newList = [...this.state.listLater];
             for( let i = 0; i < newList.length; i++) {
-                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                if( newList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                     return null;
                 } else {
                     newList.push(movie);
@@ -159,7 +270,7 @@ class PageMovieInfo extends React.PureComponent {
             };
             let newList = [...this.state.listFavorites];
             for( let i = 0; i < newList.length; i++) {
-                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                if( newList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                     return null;
                 } else {
                     newList.push(movie);
@@ -207,7 +318,7 @@ class PageMovieInfo extends React.PureComponent {
             };
             let newList = [...this.state.listWatched];
             for( let i = 0; i < newList.length; i++) {
-                if( newList[i].movieValue.id ===  this.state.getMovieID.id) {
+                if( newList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                     return null;
                 } else {
                     newList.push(newMovie);
@@ -231,7 +342,7 @@ class PageMovieInfo extends React.PureComponent {
         let watchLater = [...this.state.listLater];
         let addedMovie;
         for( let i = 0; i < watchLater.length; i++) {
-            if( watchLater[i].movieValue.id ===  this.state.getMovieID.id) {
+            if( watchLater[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                 addedMovie = true;
                 break;
             } else {
@@ -246,7 +357,7 @@ class PageMovieInfo extends React.PureComponent {
         let copyList = [...this.state.listFavorites];
         let addedMovie;
         for( let i = 0; i < copyList.length; i++) {
-            if( copyList[i].movieValue.id ===  this.state.getMovieID.id) {
+            if( copyList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                 addedMovie = true;
                 break;
             } else {
@@ -261,7 +372,7 @@ class PageMovieInfo extends React.PureComponent {
         let copyList = [...this.state.listWatched];
         let addedMovie;
         for( let i = 0; i < copyList.length; i++) {
-            if( copyList[i].movieValue.id ===  this.state.getMovieID.id) {
+            if( copyList[i].movieValue.id ===  this.props.movieDetail.recentMovies.id) {
                 addedMovie = true;
                 break;
             } else {
@@ -272,32 +383,43 @@ class PageMovieInfo extends React.PureComponent {
         return addedMovie;
     };
 
+    openModal = () => {
+        this.setState({modalIsOpen: true});
+    };
+
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    };
     render() {
-        let movieDetail = {...this.props.movieDetail.recentMovies};
-        let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + movieDetail.backdrop_path;
+        // let movieDetail = JSON.parse(JSON.stringify(this.props.movieDetail.recentMovies));
+        // let movieCast = JSON.parse(JSON.stringify(this.props.movieDetail.recentCastList));
+        // let movieTrailer = JSON.parse(JSON.stringify(this.props.movieDetail.recentTrailers));
+        const {movieDetail} = this.props;
+        let urlBackground = URL_IMG + BACKDROP_SIZE_ORIGINAL + this.props.movieDetail.recentMovies.backdrop_path;
         let styleSlide = {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.9) 100%)," +  "url(" + urlBackground + ")" + " no-repeat center center fixed",
         };
-        console.log("STORE", this.props);
-        console.log("movie detail", this.state.movieDetail);
+        console.log("this.props", this.props.movieDetail.recentTrailers);
+        // console.log("movie detail", movieDetail);
 
         if ( this.state.requestFailed ) return <p>Failed</p>
-        if ( !this.state.getMovieID ) return <p>Loading</p>
+        if ( this.state.isFetching ) return <p>Loading</p>
         return (
             <div className = { this.compMainClass + "__wrapper"} style={ styleSlide }>
-                <Grid className = { this.compMainClass + "__container" }>
+                <div className = { this.compMainClass + "__container container" }>
                     <Row className = { this.compMainClass + "__row"}>
                         <div className = { this.compMainClass + "__left-column"}>
                             <img className = { this.compMainClass + "__left-column_poster"}
-                                 src={ URL_IMG + IMG_SIZE_LARGE + movieDetail.poster_path }
+                                 src={ URL_IMG + IMG_SIZE_LARGE + this.props.movieDetail.recentMovies.poster_path }
                                  alt=""/>
                         </div>
                         <div className = { this.compMainClass + "__right-column"}>
                             <div className = { this.compMainClass + "__title"}>
-                                { movieDetail.title }
+                                { this.props.movieDetail.recentMovies.title }
                             </div>
                             <blockquote  className = { this.compMainClass + "__quote"}>
-                                { movieDetail.tagline }
+                                { this.props.movieDetail.recentMovies.tagline }
                             </blockquote >
                             <div className = { this.compMainClass + "__inline-block"}>
                                 <div className = { this.compMainClass + "__data-release"}>
@@ -305,7 +427,7 @@ class PageMovieInfo extends React.PureComponent {
                                         <img src="/images/calendar-flat.png" alt=""/>
                                     </div>
                                     <p className = { this.compMainClass + "__inline-block_text"}>
-                                        { (movieDetail.release_date !== undefined) ? movieDetail.release_date.substring(0,4) : null }
+                                        { (this.props.movieDetail.recentMovies.release_date !== undefined) ? this.props.movieDetail.recentMovies.release_date.substring(0,4) : null }
                                     </p>
                                 </div>
                                 <div className = { this.compMainClass + "__votes"}>
@@ -313,7 +435,7 @@ class PageMovieInfo extends React.PureComponent {
                                         <img src="/images/rating-icon.png" alt=""/>
                                     </div>
                                     <p className = { this.compMainClass + "__inline-block_text"}>
-                                        { movieDetail.vote_average } 
+                                        { this.props.movieDetail.recentMovies.vote_average }
                                     </p>
                                 </div>
                                 <div className = { this.compMainClass + "__votes-count"}>
@@ -321,33 +443,42 @@ class PageMovieInfo extends React.PureComponent {
                                         <img src="/images/likes-icon.png" alt=""/>
                                     </div>
                                     <p className = { this.compMainClass + "__inline-block_text"}>
-                                        { movieDetail.vote_count }
+                                        { this.props.movieDetail.recentMovies.vote_count }
                                     </p>
                                 </div>
                             </div>
-                            <div className = { this.compMainClass + "__description"}>
-                                { movieDetail.overview }
-                            </div>
                             <div className = { this.compMainClass + "__block-button"}>
                                 <a data-added = { this.checkedMovieInListLater() }
-                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListLater() ? "later-active" : "later") }
+                                   className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListLater() ? "later-active" : "later") }
                                    onClick={ this.setToListLate }><i></i>Хочу посмотреть</a>
                                 <a data-added = { this.checkedMovieInListFavorites() }
-                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListFavorites() ? "favorites-active" : "favorites")}
-                                        onClick={ this.setToListFavorites }><i></i>Добавить в избранное</a>
+                                   className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListFavorites() ? "favorites-active" : "favorites")}
+                                   onClick={ this.setToListFavorites }><i></i>В избранное</a>
                                 <a data-added = { this.checkedMovieInListWatched() }
-                                        className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListWatched() ? "watched-active" : "watched")}
-                                        onClick={ this.setToListWatched }><i></i>Смотрел</a>
+                                   className = { this.compMainClass + "__button" + " " + (this.checkedMovieInListWatched() ? "watched-active" : "watched")}
+                                   onClick={ this.setToListWatched }><i></i>Смотрел</a>
                             </div>
-                        </div>
-                    </Row>
-                    <Row className = { this.compMainClass + "__row"}>
-                        <div>
-                            Actors
-                        </div>
-                    </Row>
+                            <div className = { this.compMainClass + "__description"}>
+                                <h4>Про что фильм: </h4>
+                                { this.props.movieDetail.recentMovies.overview }
+                            </div>
 
-                </Grid>
+                        </div>
+                    </Row>
+                    <div className = { this.compMainClass + "__block-actors" }>
+                        <h3>В главных ролях:</h3>
+                        <CastList castsValue = { this.props.movieDetail.recentCastList.slice(0, CAST_MAX_NUM) }/>
+                    </div>
+                    <div className = { this.compMainClass + "__block-trailer" }>
+                        <button onClick={this.openModal}>click</button>
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onRequestClose={this.closeModal}
+                            contentLabel="Example Modal">
+                            <iframe src={URL_YOUTUBE + this.props.movieDetail.recentTrailers.slice(0,TRAILER_MAX_NUM)[0].key} allowFullScreen/>
+                        </Modal>
+                    </div>
+                </div>
             </div>
         )
     }

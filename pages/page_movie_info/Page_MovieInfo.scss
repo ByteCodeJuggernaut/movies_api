@@ -5,6 +5,7 @@
     position: relative;
     background-size: 100%!important;
     padding-top: 150px;
+    height: 100%;
     & > .PageMovieInfo__container {
         & > .PageMovieInfo__row {
             display: flex;
@@ -12,7 +13,7 @@
             flex-wrap: wrap;
             padding: 40px 0;
             justify-content: center;
-            align-items: stretch;
+            align-items: center;
             & > .PageMovieInfo__left-column {
                 display: flex;
                 flex: 1 1 20%;
@@ -23,7 +24,7 @@
                 align-items: stretch;
                 & > .PageMovieInfo__left-column_poster {
                     display: block;
-                    max-width: 300px;
+                    max-width: 400px;
                     border-radius: 10px;
                     box-shadow: 0 14px 28px rgba(0,0,0,0.85), 0 10px 10px rgba(0,0,0,0.55);
                 }
@@ -37,9 +38,9 @@
                 & > .PageMovieInfo__title {
                     font-size: $h0;
                     font-weight: bold;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                     color: $default-90;
-                    line-height: 1.4;
+                    line-height: 1.2;
                     text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
                 }
                 & > .PageMovieInfo__quote {
@@ -56,7 +57,7 @@
                     flex-wrap: wrap;
                     align-items: stretch;
                     justify-content: flex-start;
-                    margin-bottom: 30px;
+                    margin-bottom: 20px;
                     & > .PageMovieInfo__data-release {
                         display: flex;
                         flex-direction: row;
@@ -94,7 +95,7 @@
                         width: 50px;
                         height: 50px;
                         margin-right: 15px;
-                        box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                        //box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
                         overflow: hidden;
                         & > img {
                             display: block;
@@ -120,19 +121,26 @@
                     flex-wrap: wrap;
                     align-items: stretch;
                     justify-content: flex-start;
+                    margin: 15px 0;
                     & > .PageMovieInfo__button {
-                        padding: 10px 25px;
+                        padding: 8px 10px;
+                        width: 175px;
+                        text-align: center;
                         margin-right: 30px;
-                        border-radius: 30px;
+                        border-radius: 15px;
                         font-size: $default - 2;
                         color: $dark-90;
                         display: flex;
                         flex-direction: row;
                         flex-wrap: wrap;
                         align-items: center;
+                        background-color: rgba(178, 178, 178, 0.5);
+                        box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);;
+                        border: 1px solid #000000;
                         justify-content: flex-start;
+                        transition: all .4s ease;
                         &:hover {
-                            background-color: #f0f0f0;
+                            background-color: rgba(240, 240, 240, 0.7);
                             cursor: pointer;
                         }
                     }
@@ -141,14 +149,17 @@
                         &:hover {
                             & > i {
                                 background: url("/images/toFavorites_active.png") no-repeat center center;
+                                background-size: cover;
                             }
                         }
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/toFavorites.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
                     & .later {
@@ -156,14 +167,17 @@
                         &:hover {
                             & > i {
                                 background: url("/images/later_active.png") no-repeat center center;
+                                background-size: cover;
                             }
                         }
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/later.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
                     & .watched {
@@ -171,48 +185,59 @@
                         &:hover {
                             & > i {
                                 background: url("/images/watched_active.png") no-repeat center center;
+                                background-size: cover;
                             }
                         }
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/watched.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
                     & .watched-active {
                         position: relative;
-                        color: white;
-                        background-color: #da2020c9;
+                        color: $dark-90;
+                        background-color: rgba(241, 241, 241, 0.85);
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/watched_active.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
                     & .later-active {
                         position: relative;
-                        background-color: #da2020c9;
+                        color: $dark-90;
+                        background-color: rgba(241, 241, 241, 0.85);
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/later_active.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
                     & .favorites-active {
                         position: relative;
-                        background-color: #da2020c9;
+                        color: $dark-90;
+                        background-color: rgba(241, 241, 241, 0.85);
                         & > i {
                             display: block;
                             position: relative;
-                            width: 50px;
-                            height: 50px;
+                            width: 25px;
+                            height: 25px;
+                            margin-right: 10px;
                             background: url("/images/toFavorites_active.png") no-repeat center center;
+                            background-size: cover;
                         }
                     }
 
@@ -221,5 +246,24 @@
 
             }
         }
+        & > .PageMovieInfo__block-actors {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            & > h3 {
+                font-size: 24px;
+                color: rgba(255, 255, 255, 0.9);
+                text-shadow: 0 3px 3px rgba(0, 0, 0, 0.35), 0 2px 2px rgba(0, 0, 0, 0.15);
+                margin-bottom: 25px;
+            }
+            & > .PageMovieInfo__actors {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
     }
 }

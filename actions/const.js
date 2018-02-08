@@ -26,4 +26,9 @@ export const BACKDROP_SIZE_MEDIUM = 'w780/';
 export const BACKDROP_SIZE_LARGE = 'w1280/';
 export const BACKDROP_SIZE_ORIGINAL = 'original';
 export const IMG_LANGUAGE = '';
+export const URL_YOUTUBE = 'https://www.youtube.com/embed/';
+export const URL_CAST = '/casts';
+export const URL_VIDEO = '/videos';
+export const CAST_MAX_NUM = 6;
+export const TRAILER_MAX_NUM = 1;
 

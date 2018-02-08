@@ -1,0 +1,44 @@
+@import 'variables';
+
+.container {
+    width: $container-mobile;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+
+}
+
+@media all and (min-width: 1450px){
+    .container{
+        width: $container-large;
+    }
+
+}
+@media all and (max-width: 1450px){
+    .container{
+        width: $container-medium;
+    }
+
+}
+@media all and (max-width: 1250px){
+    .container{
+        width: $container-small;
+    }
+
+}
+@media all and (max-width: 860px) {
+    .container{
+        width: $container-tablet;
+    }
+
+}
+@media all and (max-width: 560px){
+    .container{
+        width: $container-mobile;
+    }
+}
+@media all and (max-width: 320px){
+    .container{
+        width: $container-mobile;
+    }
+}

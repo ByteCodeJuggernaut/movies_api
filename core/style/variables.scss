@@ -26,3 +26,34 @@ $default-50: rgba(255, 255, 255, 0.5);
 $default-70: rgba(255, 255, 255, 0.7);
 $default-80: rgba(255, 255, 255, 0.8);
 $default-90: rgba(255, 255, 255, 0.9);
+
+$container-large: 1396px;
+$container-medium: 1152px;
+$container-small: 848px;
+$container-tablet: 704px;
+$container-mobile: 288px;
+
+
+@mixin large-screen() {
+    @media all and (min-width: 1450px) {
+        @content;
+    }
+}
+
+@mixin medium-screen() {
+    @media all and (max-width: 1450px) {
+        @content;
+    }
+}
+
+@mixin small-screen() {
+    @media all and (max-width: 1250px) {
+        @content;
+    }
+}
+
+@mixin xsmall-screen() {
+    @media all and (max-width: 860px) {
+        @content;
+    }
+}

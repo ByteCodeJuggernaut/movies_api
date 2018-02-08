@@ -12,6 +12,8 @@ export const SET_UPCOMING_MOVIE_LIST = 'SET_UPCOMING_MOVIE_LIST';
 export const SET_TOP_RATING_MOVIE_LIST = 'SET_TOP_RATING_MOVIE_LIST';
 export const SET_MOVIE_TODAY_LIST = 'SET_MOVIE_TODAY_LIST';
 export const SET_RECENT_MOVIES = 'SET_RECENT_MOVIES';
+export const SET_RECENT_MOVIES_CAST = 'SET_RECENT_MOVIES_CAST';
+export const SET_RECENT_MOVIES_TRAILERS = 'SET_RECENT_MOVIES_TRAILERS';
 export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIE_FAILURE = 'FETCH_MOVIE_FAILURE';
@@ -264,6 +266,8 @@ const defaultMyMoviesList = {
 const defaultRecentMovie = {
     isFetching: false,
     recentMovies:{},
+    recentCastList: {},
+    recentTrailers: {},
     error:{}
 };
 
@@ -336,7 +340,11 @@ const primaryMovieList = ( state = defaultPrimaryMovieList, action ) => {
 const recentMoviesList = ( state = defaultRecentMovie, action ) => {
     switch ( action.type ){
         case SET_RECENT_MOVIES:
-            return {...state, isFetching:true, error:null, recentMovies: action.movieDetail};
+            return {...state, isFetching:false, error:null, recentMovies: action.movieDetail};
+        case SET_RECENT_MOVIES_CAST:
+            return {...state, isFetching:false, error:null, recentCastList: action.recentCastList.cast};
+        case SET_RECENT_MOVIES_TRAILERS:
+            return {...state, isFetching:false, error:null, recentTrailers: action.recentTrailers.results};
         default:
             return state;
     }
@@ -387,7 +395,6 @@ const moviesApi = combineReducers({
     menuList,
     primaryMovieList,
     recentMoviesList,
-    movieDetail,
     myListMovies,
     accountDetail,
     routing: routerReducer
