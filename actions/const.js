@@ -30,6 +30,7 @@ export const URL_YOUTUBE = 'https://www.youtube.com/embed/';
 export const URL_CAST = '/casts';
 export const URL_VIDEO = '/videos';
 export const URL_SIMILAR = '/similar';
+export const URL_COLLECTION = 'https://api.themoviedb.org/3/collection/';
 export const CAST_MAX_NUM = 6;
 export const TRAILER_MAX_NUM = 1;
 

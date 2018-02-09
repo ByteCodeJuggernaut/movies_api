@@ -16,6 +16,7 @@ import PageMain                                         from './pages/page_main/
 import PageAccount                                      from './pages/page_account/Page_Account';
 import PageMovieInfo                                    from './pages/page_movie_info/Page_MovieInfo';
 import BlockHeader                                      from './components/complex/Block_Header';
+import PageCollection                                   from "./pages/page_collection/Page_Collection";
 
 // если необходимо, вид сборки можно проверить в коде:
 // if (process.env.NODE_ENV === 'production') {
@@ -34,6 +35,7 @@ ReactDOM.render(
                 <BlockHeader/>
                     <Route exact path="/" component = { PageMain }/>
                     <Route path="/mylist" component = { PageAccount }/>
+                    <Route path="/collections" component = { PageCollection }/>
                     <Route path="/movie/:id" component = { PageMovieInfo }/>
 
             </div>

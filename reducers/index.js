@@ -24,6 +24,8 @@ export const DELETE_MOVIE_FAVORITES = 'DELETE_MOVIE_FAVORITES';
 export const DELETE_MOVIE_WATCHED = 'DELETE_MOVIE_WATCHED';
 export const ADD_MOVIE_WATCHED = 'ADD_MOVIE_WATCHED';
 export const SET_RECENT_MOVIES_SIMILAR = 'SET_RECENT_MOVIES_SIMILAR';
+export const SET_COLLECTION_MOVIES = 'SET_COLLECTION_MOVIES';
+
 
 
 
@@ -55,7 +57,8 @@ const defaultCollections = {
         '325470',
         '1241',
         '404609',
-    ]
+    ],
+    selectedCollection: {}
 };
 
 const defaultMyMoviesList = {
@@ -439,7 +442,7 @@ const defaultMenuList = {
         },
         {
             title: 'Коллекции',
-            linkTo: '/bestchoosefilms',
+            linkTo: '/collections',
         },
         {
             title: 'Мой список',
@@ -479,6 +482,17 @@ const movieList = (state = defaultMovieList, action) => {
         case SET_TOP_RATING_MOVIE_LIST:
             return {...state, isFetching:false, error:null, topRatedFilmList: action.dataMoviesTop };
 
+        default:
+            return state;
+    }
+};
+
+const moviesCollection = (state = defaultCollections, action) => {
+    switch ( action.type ){
+        case FETCH_MOVIES:
+            return {...state, isFetching:true};
+        case SET_COLLECTION_MOVIES:
+            return {...state, isFetching:true, error:null, selectedCollection: action.collections};
         default:
             return state;
     }
@@ -555,6 +569,7 @@ const moviesApi = combineReducers({
     recentMoviesList,
     myListMovies,
     accountDetail,
+    moviesCollection,
     routing: routerReducer
 
 });

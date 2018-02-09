@@ -1,0 +1,97 @@
+
+
+.PageCollection__wrapper {
+    display: flex;
+    position: relative;
+    //height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    //padding: 20px;
+    text-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+    & > .PageCollection__header {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        & > h2 {
+            font-size: 50px;
+            color: rgba(249, 249, 249, 0.77);
+            text-align: center;
+            padding: 15px;
+        }
+        & > p {
+            width: 50%;
+            color: #c3c3c3;
+            margin: 0 auto;
+            font-size: 25px;
+            padding: 0 15px;
+        }
+    }
+    & > .PageCollection__collection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        & > .PageCollection__film {
+            display: flex;
+            padding: 50px 200px;
+            margin: 45px 0;
+            flex-direction: row;
+            justify-content: center;
+            align-items: stretch;
+            background-size: 100% !important;
+            box-shadow: 0 30px 40px 20px rgba(0,0,0,0.45), 0 2px 2px rgba(0,0,0,0.15);
+            & > .PageCollection__poster {
+                flex: 1 1 10%;
+                & > .PageCollection__image {
+                    width: 300px;
+                    margin: 0 auto;
+                    border-radius: 8px;
+                    box-shadow: 0 3px 3px rgba(0,0,0,0.35), 0 2px 2px rgba(0,0,0,0.15);
+                }
+            }
+            & > .PageCollection__info {
+                flex: 1 1 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 0 50px;
+                margin: auto;
+                & > .PageCollection__info-title {
+                    font-size: 40px;
+                    color: #c3c3c3;
+                    margin-bottom: 10px;
+                    transition: all .4s ease;
+                    font-weight: bold;
+                    &:hover {
+                        color: #da2210;
+                        cursor: pointer;
+                    }
+                }
+                & > .PageCollection__info-rating {
+                    font-size: 36px;
+                    color: #f3b50e;
+                    margin-bottom: 10px;
+                }
+                & > .PageCollection__info-data {
+                    font-size: 36px;
+                    color: #c3c3c3;
+                    margin-bottom: 10px;
+                }
+                & > h3 {
+                    font-size: 24px;
+                    color: #c3c3c3;
+                    margin-bottom: 10px;
+                }
+                & > .PageCollection__info-overview {
+                    font-size: 18px;
+                    line-height: 1.2;
+                    color: #c3c3c3;
+                }
+            }
+        }
+    }
+}
