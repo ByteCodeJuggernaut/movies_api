@@ -39,8 +39,8 @@ let g_settings = {
         },
         {
             breakpoint: 824,
-            settings: { slidesToShow: 2, arrows: false, dots: true, autoplay: true, verticaleMode: true, vertical: true,
-                verticalSwiping: true, }
+            settings: { slidesToShow: 2, arrows: false, dots: true, autoplay: true, vertical: true,
+                verticalSwiping: true, slidesToScroll: 1, }
         },
         {
             breakpoint: 1378,
