@@ -27,52 +27,98 @@
             }
         }
     }
-    & .PageAccount__film {
+    & .PageAccount__element {
         display: flex;
         position: relative;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        transition: all .4s ease;
-        margin: 15px 0;
-        border-radius: 8px;
         &:hover {
-            cursor: pointer;
-            background-color: rgba(211, 211, 211, 0.31);
+            & > .PageAccount__delete {
+                opacity: 1;
+                visibility: visible;
+
+            }
+            & > .PageAccount__film {
+                cursor: pointer;
+                background-color: rgba(211, 211, 211, 0.31);
+            }
         }
-        & > .PageAccount__film_poster {
-            display: block;
-            padding: 20px;
-            & > img {
-                display: block;
-                width: 150px;
-                height: auto;
-                border-radius: 8px;
-                @include x-small-screen {
-                    width: 200px;
+        & > .PageAccount__delete {
+            position: absolute;
+            display: flex;
+            top: 30px;
+            right: 20px;
+            opacity: 0;
+            transition: all .3s ease;
+            visibility: hidden;
+            z-index: 1000;
+            & > .PageAccount__delete-button {
+                padding: 10px 15px;
+                font-size: 16px;
+                color: #da2210;
+                border: 1px solid #da2210;
+                border-radius: 5px;
+                transition: all .3s ease;
+                background-color: transparent;
+                &:hover {
+                    background-color: #da2210;
+                    color: #f9f9f9;
+                    cursor: pointer;
                 }
             }
         }
-        & > .PageAccount__film_information {
+        & .PageAccount__film {
             display: flex;
             position: relative;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: stretch;
-            color: $default-90;
-            & > .PageAccount__film_information-title {
-                font-size: 20px;
-                margin-bottom: 15px;
-                @include x-small-screen {
-                    font-size: 26px;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            transition: all .4s ease;
+            margin: 15px 0;
+            border-radius: 8px;
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(211, 211, 211, 0.31);
+            }
+            & > .PageAccount__film_poster {
+                display: block;
+                padding: 20px;
+                & > img {
+                    display: block;
+                    width: 150px;
+                    height: auto;
+                    border-radius: 8px;
+                    @include x-small-screen {
+                        width: 200px;
+                    }
                 }
             }
-            & > .PageAccount__film_information-description {
-                font-size: 16px;
-                @include x-small-screen {
-                    font-size: 18px;
+            & > .PageAccount__film_information {
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                color: $default-90;
+                & > .PageAccount__film_information-title {
+                    font-size: 20px;
+                    margin-bottom: 15px;
+                    @include x-small-screen {
+                        font-size: 26px;
+                    }
+                }
+                & > .PageAccount__film_information-description {
+                    font-size: 16px;
+                    @include x-small-screen {
+                        font-size: 18px;
+                    }
                 }
             }
         }
     }
+
+}
+
+.PageAccount__empty-list {
+    font-size: 24px;
+    padding: 15px;
+    color: #da2210;
 }

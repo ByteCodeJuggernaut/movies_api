@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { default as isoFetch } from 'isomorphic-fetch';
 import { URL_LIST, LANGUAGE, URL_SIMILAR, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, BACKDROP_SIZE_LARGE, API_KEY, URL_DETAIL, BACKDROP_SIZE_ORIGINAL, URL_CAST, URL_VIDEO, CAST_MAX_NUM, URL_YOUTUBE, TRAILER_MAX_NUM } from '../../actions/const';
-import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
+// import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 
 import { fetchMovieDetail, fetchCastList, fetchTrailerList} from '../../actions/actions';
@@ -379,17 +379,17 @@ class PageMovieInfo extends React.PureComponent {
         if ( this.state.requestFailed ) return <p>Failed</p>
         if ( this.isExists(this.state.isFetching) !== true ) return <div className = { this.compMainClass + "__loading" }>
             <h3>Loading</h3>
-            <div class="slider">
-                <div class="line"></div>
-                <div class="break dot1"></div>
-                <div class="break dot2"></div>
-                <div class="break dot3"></div>
+            <div className="slider">
+                <div className="line"></div>
+                <div className="break dot1"></div>
+                <div className="break dot2"></div>
+                <div className="break dot3"></div>
             </div>
         </div>
         return (
             <div className = { this.compMainClass + "__wrapper"} style={ styleSlide }>
                 <div className = { this.compMainClass + "__container container" }>
-                    <Row className = { this.compMainClass + "__row"}>
+                    <div className = { this.compMainClass + "__row"}>
                         <div className = { this.compMainClass + "__left-column"}>
                             <img className = { this.compMainClass + "__left-column_poster"}
                                  src={ URL_IMG + IMG_SIZE_LARGE + this.props.movieDetail.recentMovies.poster_path }
@@ -470,7 +470,7 @@ class PageMovieInfo extends React.PureComponent {
 
                             </div>
                         </div>
-                    </Row>
+                    </div>
                     <div className = { this.compMainClass + "__block-actors" }>
                         <h3>В главных ролях:</h3>
                         <CastList castsValue = { this.props.movieDetail.recentCastList.slice(0, CAST_MAX_NUM) }/>

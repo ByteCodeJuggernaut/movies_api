@@ -4,7 +4,7 @@ import { default as isoFetch }                         from 'isomorphic-fetch';
 import Autosuggest                                      from 'react-autosuggest';
 // import logo from '../../images/logo_square.svg'
 import {URL_LIST, URL_SEARCH, LANGUAGE, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XSMALL, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
-import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
+// import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect }                                      from 'react-redux';
 import { NavLink }                                      from 'react-router-dom';
 import { Link }                                         from 'react-router-dom';
@@ -239,8 +239,8 @@ class BlockHeader extends React.PureComponent {
         };
         return(
             <div>
-            <Row className = { this.compMainClass + "__container" + " " + this.state.activeClass }>
-                <Col className = { this.compMainClass + "__logo-box" }>
+            <div className = { this.compMainClass + "__container" + " " + this.state.activeClass }>
+                <div className = { this.compMainClass + "__logo-box" }>
                     <a href="#" title="Вернуться на главную">
                         <img src="/images/logo-api.png"
                              alt="Логотип MOVIEFLIX"
@@ -248,12 +248,12 @@ class BlockHeader extends React.PureComponent {
                              onMouseOut={ this.handleUnHoverImg }
                              className = { this.compMainClass + "__logo-box_image" }/>
                     </a>
-                </Col>
-                <Col className = { this.compMainClass + "__menu-box" }>
+                </div>
+                <div className = { this.compMainClass + "__menu-box" }>
                     <ul className = { this.compMainClass + "__menu-box_menu" }>
                         { this.__renderMenuList() }
                     </ul>
-                </Col>
+                </div>
                 <div className = { this.compMainClass + "__search-box" }>
                     <Autosuggest
                         suggestions={suggestions}
@@ -264,7 +264,7 @@ class BlockHeader extends React.PureComponent {
                         renderSuggestion={this.renderSuggestion}
                         inputProps={inputProps} />
                 </div>
-                <Col className = { this.compMainClass + "__account-box" }>
+                <div className = { this.compMainClass + "__account-box" }>
                     {
                         ( this.state.isLogin ) ?
                             <div className = { this.compMainClass + "__account-box_container" }>
@@ -317,8 +317,8 @@ class BlockHeader extends React.PureComponent {
                             </div>
                     }
 
-                </Col>
-            </Row>
+                </div>
+            </div>
 
         </div>
             )

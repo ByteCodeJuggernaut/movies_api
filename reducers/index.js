@@ -46,6 +46,18 @@ const defaultPrimaryMovieList = {
     error:{}
 };
 
+const defaultCollections = {
+    collections: [
+        '283579',
+        '453993',
+        '115575',
+        '10',
+        '325470',
+        '1241',
+        '404609',
+    ]
+};
+
 const defaultMyMoviesList = {
     watchLater:[
         { movieValue: {
@@ -111,6 +123,152 @@ const defaultMyMoviesList = {
                 vote_average: 7.7,
                 vote_count: 1792
             }, added: true },
+        {
+            movieValue: {
+                adult: false,
+                backdrop_path: "/umC04Cozevu8nn3JTDJ1pc7PVTn.jpg",
+                belongs_to_collection: {
+                    id: 404609,
+                    name: "Джон Уик (Коллекция)",
+                    poster_path: "/uGhPxTrmT5yASzZrR1oz1ft9UWr.jpg",
+                    backdrop_path: "/fSwYa5q2xRkBoOOjueLpkLf3N1m.jpg"
+                },
+                budget: 20000000,
+                genres: [
+                    {
+                        id: 28,
+                        name: "боевик"
+                    },
+                    {
+                        id: 53,
+                        name: "триллер"
+                    }
+                ],
+                homepage: "",
+                id: 245891,
+                imdb_id: "tt2911666",
+                original_language: "en",
+                original_title: "John Wick",
+                overview: "Джон Уик — бывший наемный убийца — ведет размеренную жизнь, когда преступник крадет его любимый Mustang 1969 года и попутно убивает собаку Дейзи, единственное живое напоминание об умершей жене. Жажда мести пробуждает в нем, казалось, утерянную хватку",
+                popularity: 426.103321,
+                poster_path: "/r7rLaG7ri160xobkDqS3S14YZ1s.jpg",
+                production_companies: [
+                    {
+                        name: "Summit Entertainment",
+                        id: 491
+                    },
+                    {
+                        name: "Warner Bros.",
+                        id: 6194
+                    },
+                    {
+                        name: "87Eleven",
+                        id: 23008
+                    },
+                    {
+                        name: "DefyNite Films",
+                        id: 36259
+                    },
+                    {
+                        name: "MJW Films",
+                        id: 36433
+                    },
+                ],
+                production_countries: [
+                    {
+                        iso_3166_1: "CA",
+                        name: "Canada"
+                    },
+                    {
+                        iso_3166_1: "CN",
+                        name: "China"
+                    },
+                    {
+                        iso_3166_1: "US",
+                        name: "United States of America"
+                    }
+                ],
+                release_date: "2014-10-22",
+                revenue: 88761661,
+                runtime: 94,
+                spoken_languages: [
+                    {
+                        iso_639_1: "hu",
+                        name: "Magyar"
+                    },
+                    {
+                        iso_639_1: "en",
+                        name: "English"
+                    },
+                    {
+                        iso_639_1: "ru",
+                        name: "Pусский"
+                    }
+                ],
+                status: "Released",
+                tagline: "Лучше его не трогать",
+                title: "Джон Уик",
+                video: false,
+                vote_average: 7,
+                vote_count: 6673,
+            },
+            added: true
+        },
+        { movieValue: {
+                adult: false,
+                backdrop_path: "/xBKGJQsAIeweesB79KC89FpBrVr.jpg",
+                belongs_to_collection: null,
+                budget: 25000000,
+                genres: [
+                    {
+                        id: 18,
+                        name: "драма"
+                    },
+                    {
+                        id: 80,
+                        name: "криминал"
+                    }
+                ],
+                homepage: "",
+                id: 278,
+                imdb_id: "tt0111161",
+                original_language: "en",
+                original_title: "The Shawshank Redemption",
+                overview: "Фильм удостоен шести номинаций на `Оскар`, в том числе и как лучший фильм года. Шоушенк - название тюрьмы. И если тебе нет еще 30-ти, а ты получаешь пожизненное, то приготовься к худшему: для тебя выхода из Шоушенка не будет! Актриса Рита Хэйворт - любимица всей Америки. Энди Дифрейну она тоже очень нравилась. Рита никогда не слышала о существовании Энди, однако жизнь Дифрейну, бывшему вице-президенту крупного банка, осужденному за убийство жены и ее любовника, Рита Хэйворт все-таки спасла.",
+                popularity: 37.983918,
+                poster_path: "/sRBNv6399ZpCE4RrM8tRsDLSsaG.jpg",
+                production_companies: [
+                    {
+                        name: "Castle Rock Entertainment",
+                        id: 97
+                    },
+                    {
+                        name: "Warner Bros.",
+                        id: 6194
+                    }
+                ],
+                production_countries: [
+                    {
+                        iso_3166_1: "US",
+                        name: "United States of America"
+                    }
+                ],
+                release_date: "1994-09-23",
+                revenue: 28341469,
+                runtime: 142,
+                spoken_languages: [
+                    {
+                        iso_639_1: "en",
+                        name: "English"
+                    }
+                ],
+                status: "Released",
+                tagline: "«Страх - это кандалы. Надежда - это свобода.»",
+                title: "Побег из Шоушенка",
+                video: false,
+                vote_average: 8.5,
+                vote_count: 9389,
+            }, added: true }
     ],
     watchFavorites: [
         {
@@ -280,7 +438,7 @@ const defaultMenuList = {
             linkTo: '/',
         },
         {
-            title: 'Лучший выбор',
+            title: 'Коллекции',
             linkTo: '/bestchoosefilms',
         },
         {

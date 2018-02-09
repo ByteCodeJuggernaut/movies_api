@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import { default as isoFetch } from 'isomorphic-fetch';
 import {URL_LIST, URL_LIST_TOP_RATED, URL_LIST_UPCOMING, URL_POPULAR, SORT_VOTE, LANGUAGE, REGION, SORT_POPULARITY, URL_IMG, IMG_SIZE_LARGE, IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT} from '../../actions/const';
-import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
+// import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
@@ -66,26 +66,26 @@ class FilmsRenderer extends React.PureComponent {
                 {filterList.map( ( film ) => {
                     return (
 
-                            <Link key={ film.id } to={'/movie/'+ film.id} className = { this.compMainClass + "__element-link" }>
-                                <div className = { this.compMainClass + "__element"}
-                                     style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
-                                    <div className = { this.compMainClass + "__overlay" }>
-                                        <div className = { this.compMainClass + "__overlay_title" }>
-                                            { film.title }
-                                        </div>
-                                        <div className = { this.compMainClass + "__overlay_rating" }>
-                                                <span>
-                                                    { film.vote_average }
-                                                </span> Рейтинг
-                                        </div>
-                                        <div className = { this.compMainClass + "__overlay_plot" }>
-                                            {
-                                                (film.overview.length > 150) ?  film.overview.substring(0, 150) + "..." : film.overview
-                                            }
-                                        </div>
+                        <Link key={ film.id } to={'/movie/'+ film.id} className = { this.compMainClass + "__element-link" }>
+                            <div className = { this.compMainClass + "__element"}
+                                 style = {{ backgroundImage: 'url(' +  URL_IMG + IMG_SIZE_LARGE + film.poster_path  + ')' }}>
+                                <div className = { this.compMainClass + "__overlay" }>
+                                    <div className = { this.compMainClass + "__overlay_title" }>
+                                        { film.title }
+                                    </div>
+                                    <div className = { this.compMainClass + "__overlay_rating" }>
+                                            <span>
+                                                { film.vote_average }
+                                            </span> Рейтинг
+                                    </div>
+                                    <div className = { this.compMainClass + "__overlay_plot" }>
+                                        {
+                                            (film.overview.length > 150) ?  film.overview.substring(0, 150) + "..." : film.overview
+                                        }
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
+                        </Link>
 
                     )
                 } )}
@@ -215,98 +215,10 @@ class PageMain extends React.Component {
 
 }
 
-// const mapDispatch = dispatch => ({
-//     getMovies: () => dispatch(getMovies())
-// });
-
 export default connect (
     state => ({
-        // storeApi: state,
         popularFilmsList: state.movieList.popularFilmsList,
         upcomingFilmList: state.movieList.upcomingFilmList,
         topRatedFilmList: state.movieList.topRatedFilmList
     }),
-    // mapDispatch
 ) (PageMain);
-//
-// isoFetch( urlPopular )
-//     .then( response => {
-//         if ( !response.ok ) {
-//             throw Error( "Ошибка запроса" )
-//         }
-//         return response;
-//     } )
-//     .then( data => data.json() )
-//     .then( data => {
-//         this.props.dispatch({
-//             type: "SET_POPULAR_MOVIE_LIST",
-//             dataMoviesPopular: data.results,
-//         })
-//         // this.setState( {
-//         //     getPopular: data,
-//         // }, () => {
-//         //     console.log( "getPopular", this.state.getPopular );
-//         //     this.props.dispatch({
-//         //         type: "SET_POPULAR_MOVIE_LIST",
-//         //         dataMoviesPopular: this.state.getPopular.results,
-//         //     })
-//         // } );
-//     }, () => {
-//         this.setState( {
-//             requestFailed: true,
-//         } )
-//     } );
-// isoFetch( urlUpcoming )
-//     .then( response => {
-//         if ( !response.ok ) {
-//             throw Error( "Ошибка запроса" )
-//         }
-//         return response;
-//     } )
-//     .then( data => data.json() )
-//     .then( data => {
-//         this.props.dispatch({
-//             type: "SET_UPCOMING_MOVIE_LIST",
-//             dataMoviesUpcoming: data.results,
-//         })
-//         // this.setState( {
-//         //     getUpcoming: data,
-//         // }, () => {
-//         //     console.log( "getUpcoming", this.state.getUpcoming );
-//         //     this.props.dispatch({
-//         //         type: "SET_UPCOMING_MOVIE_LIST",
-//         //         dataMoviesUpcoming: this.state.getUpcoming.results,
-//         //     })
-//         // } );
-//     }, () => {
-//         this.setState( {
-//             requestFailed: true,
-//         } )
-//     } );
-// isoFetch( urlTopRated )
-//     .then( response => {
-//         if ( !response.ok ) {
-//             throw Error( "Ошибка запроса" )
-//         }
-//         return response;
-//     } )
-//     .then( data => data.json() )
-//     .then( data => {
-//         this.props.dispatch({
-//             type: "SET_TOP_RATING_MOVIE_LIST",
-//             dataMoviesTop: data.results,
-//         })
-//         // this.setState( {
-//         //     getRating: data,
-//         // }, () => {
-//         //     console.log( "getRating", this.state.getRating );
-//         //     this.props.dispatch({
-//         //         type: "SET_TOP_RATING_MOVIE_LIST",
-//         //         dataMoviesTop: this.state.getRating.results,
-//         //     })
-//         // } );
-//     }, () => {
-//         this.setState( {
-//             requestFailed: true,
-//         } )
-//     } )

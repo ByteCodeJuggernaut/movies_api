@@ -6,7 +6,6 @@ import {
     IMG_SIZE_XLARGE, IMG_SIZE_MEDIUM, BACKDROP_SIZE_MEDIUM, API_KEY, API_KEY_ALT,
     BACKDROP_SIZE_ORIGINAL
 } from '../../actions/const';
-import { Row, Col, Grid , getRowProps, getColumnProps } from 'react-flexbox-grid';
 import { connect }                                      from 'react-redux';
 import { NavLink }                                      from 'react-router-dom';
 import { Link }                                         from 'react-router-dom';

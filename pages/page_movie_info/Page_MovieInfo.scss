@@ -117,13 +117,14 @@
                     flex-direction: row;
                     flex-wrap: wrap;
                     align-items: stretch;
-                    justify-content: space-between;
+
                     margin-bottom: 20px;
                     @include medium-screen {
                         margin-bottom: 10px;
                     }
                     @include x-small-screen {
                         margin-bottom: 20px;
+                        justify-content: space-between;
                     }
                     & > .PageMovieInfo__data-release {
                         display: flex;
@@ -392,8 +393,11 @@
                 }
                 & > .PageMovieInfo__block-trailer {
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @include x-small-screen {
+                        align-items: center;
+                        justify-content: center;
+                    }
+
                     & > .PageMovieInfo__trailer-button {
                         display: flex;
                         flex-direction: row;
