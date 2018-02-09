@@ -5,6 +5,8 @@
     padding: 40px;
     position: fixed;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: auto;
     top: 0;
     width: 100vw;
@@ -12,7 +14,10 @@
     transition: all .3s ease;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
     @include small-screen {
+        position: relative;
+        background-color: #000;
         width: 100%;
+        height: auto;
         padding: 10px;
     }
     @include medium-screen {
@@ -20,8 +25,8 @@
         padding: 20px;
     }
     @include x-small-screen {
-        width: 100vw;
-        padding: 20px;
+        width: 100%;
+        padding: 5px;
     }
     & > .BlockHeader__logo-box {
         margin-right: 10px;
@@ -30,11 +35,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @include x-small-screen {
+            width: 80%;
+            height: auto;
+            margin: 0 auto;
+        }
         & > a {
             display: flex;
             position: relative;
             align-items: center;
             justify-content: center;
+            @include x-small-screen {
+                width: 100%;
+                margin: 0 auto;
+            }
             & > .BlockHeader__logo-box_image {
                 display: flex;
                 width: 100%;
@@ -46,7 +60,8 @@
                     width: 150px;
                 }
                 @include x-small-screen {
-                    width: 150px;
+                    width: 100%;
+                    margin: 0 auto;
                 }
                 &:hover {
                     cursor: pointer;
@@ -61,6 +76,10 @@
         display: flex;
         height: 51px;
         align-items: center;
+        @include x-small-screen {
+            width: 100%;
+            margin: 15px auto;
+        }
         & > .BlockHeader__menu-box_menu {
             display: flex;
             align-items: center;
@@ -68,6 +87,10 @@
             list-style: none;
             justify-content: center;
             vertical-align: middle;
+            @include x-small-screen {
+                margin: 0 auto;
+            }
+
             & > .BlockHeader__menu-box_menu-item {
                 & > a {
                     font-weight: 400;
@@ -82,7 +105,8 @@
                         padding: 5px 8px;
                     }
                     @include x-small-screen {
-                        font-size: 18px;
+                        font-size: 15px;
+                        padding: 10px 15px;
                     }
                     &:last-child {
                         margin-right: 5px;
@@ -111,6 +135,8 @@
         }
         @include x-small-screen {
             margin-left: 0;
+            width: 100%;
+            padding: 10px;
         }
         & > .BlockHeader__search-box_input {
             font-weight: 300;
@@ -150,7 +176,7 @@
             margin-left: auto;
         }
         @include x-small-screen {
-            margin-left: auto;
+            margin: 0 auto;
         }
         & > .BlockHeader__account-box_container {
             display: flex;
@@ -281,13 +307,23 @@
     padding: 10px;
     transition: all .3s ease;
     background: rgba(0, 0, 0, 0.8);
+    @include x-small-screen {
+        position: fixed;
+    }
     & > .BlockHeader__logo-box {
         justify-content: flex-start;
         align-items: center;
         margin-right: 0;
+        @include x-small-screen {
+            display: none;
+        }
         & > a {
             & > .BlockHeader__logo-box_image {
                 width: 60%;
+                @include x-small-screen {
+                    width: 40%;
+                    margin: 0 auto;
+                }
             }
         }
     }
@@ -296,6 +332,9 @@
     & > .BlockHeader__account-box {
         margin-left: 20px;
         margin-right: 20px;
+        @include x-small-screen {
+            display: none;
+        }
         & > .BlockHeader__account-box_container {
             & > .BlockHeader__account-box_container-title {
                 font-size: $default - 2;

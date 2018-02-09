@@ -49,8 +49,8 @@
             @include x-small-screen {
                 flex: 1 1 100%;
                 align-items: center;
-                margin-top: 20px;
-                padding: 30px;
+                margin-top: 0;
+                padding: 5px;
             }
             & .ElementHeaderSlide__title {
                 display: block;
@@ -71,12 +71,12 @@
                     font-size: 35px;
                 }
                 @include small-screen {
-                    font-size: 30px;
+                    font-size: 16px;
                     padding: 5px;
                 }
                 @include x-small-screen {
-                    font-size: 38px;
-                    padding: 0 20px;
+                    font-size: 18px;
+                    padding: 0;
                     text-align: center;
                 }
             }
@@ -156,8 +156,8 @@
                     padding: 5px;
                 }
                 @include x-small-screen {
-                    font-size: 28px;
-                    padding: 10px 20px;
+                    font-size: 16px;
+                    padding: 0;
                     text-align: center;
                 }
 
@@ -184,8 +184,9 @@
                         padding: 10px 10px;
                     }
                     @include x-small-screen {
-                        font-size: 28px;
-                        padding: 20px 20px;
+                        font-size: 20px;
+                        padding: 10px 10px;
+                        margin-bottom: 20px;
                     }
                     &:hover {
                         border-color: #da2210;
@@ -212,7 +213,8 @@
                 flex: 1 1 100%;
                 padding: 0;
                 width: 100%;
-                margin-top: 180px;
+                margin-top: 50px;
+                margin-bottom: 20px;
             }
             & .ElementHeaderSlide__poster {
                 display: flex;
@@ -265,11 +267,12 @@
     z-index: 10;
     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     @include x-small-screen {
-        right: 21%;
-        top: 100px;
+        right: 17%;
+        top: 10px;
         //transform: translateX(-50%);
         padding: 0;
-        font-size: 36px;
+        font-size: 18px;
+        letter-spacing: 2px;
     }
 }
 

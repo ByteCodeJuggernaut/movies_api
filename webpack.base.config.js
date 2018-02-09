@@ -41,18 +41,16 @@ export default new Config().merge({
                 fallback: "style-loader"
               })
             },
-            // {
-            //     test: /\.(png|jpg)$/,
-            //     use: [{
-            //         loader: 'file-loader',
-            //         options: {
-            //             name: '[path].[name].[ext]',
-            //             publicPath: 'images/',
-            //             useRelativePath: 'false'
-            //         }
-            //     }]
-            //
-            // },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [ {
+                    loader: 'file-loader',
+                    options: {
+                        context: path.resolve( __dirname, 'images' ),
+                        name: '[name].[ext]'
+                    }
+                } ]
+            }
         ],
     },
 
